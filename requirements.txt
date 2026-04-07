@@ -1,0 +1,22 @@
+# 后端核心库
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0
+openai>=1.0.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# 向量与检索库
+chromadb>=0.5.0
+whoosh>=2.7.4
+jieba>=0.42.1
+python-docx>=1.1.0
+
+# Web 服务
+fastapi>=0.115.0
+uvicorn>=0.31.0
+python-multipart>=0.0.12
+aiofiles>=24.1.0
+
+# Windows 特有 (用于 pywin32 兼容)
+pywin32>=306

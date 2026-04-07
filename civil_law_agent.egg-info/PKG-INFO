@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: civil-law-agent
+Version: 0.1.0
+Summary: 民商事司法智能体 - 外商投资纠纷 MVP
+Requires-Python: >=3.10
+Requires-Dist: langgraph>=0.2.0
+Requires-Dist: langchain-core>=0.3.0
+Requires-Dist: langchain-openai>=0.2.0
+Requires-Dist: llama-index-core>=0.11.0
+Requires-Dist: pyseekdb>=1.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: python-dotenv>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: gradio>=4.0.0; extra == "dev"

@@ -1,0 +1,62 @@
+{
+  "equity_transfer": {
+    "name": "股权转让纠纷",
+    "description": "主要涉及股权买卖、转让协议履行、对价支付及工商变更等争议。",
+    "required_slots": {
+      "target_company": { "desc": "目标公司名称/基本信息", "type": "subject" },
+      "agreement_status": { "desc": "协议签署情况（是否有书面协议、双方盖章）", "type": "evidence" },
+      "payment_status": { "desc": "对价支付情况（支付金额、支付凭证/流水）", "type": "evidence" },
+      "registration_status": { "desc": "工商变更情况（是否已完成工商登记变更）", "type": "status" }
+    },
+    "adversarial_tips": [
+      "是否存在隐名代持情形？",
+      "转让价格是否显着低于市场价？",
+      "是否存在优先购买权受侵害的主张？"
+    ]
+  },
+  "corporate_resolution": {
+    "name": "公司决议效力/撤销纠纷",
+    "description": "涉及股东会或董事会决议的程序合法性、内容合规性等争议。",
+    "required_slots": {
+      "shareholder_qualification": { "desc": "原告股东资格（登记在册、持股比例）", "type": "subject" },
+      "resolution_type": { "desc": "决议类型（股东会、董事会）", "type": "category" },
+      "procedural_flaws": { "desc": "程序瑕疵（会议通知时间、送达情况）", "type": "evidence" },
+      "voting_ratio": { "desc": "表决权比例（是否达法定/章程多数）", "type": "status" }
+    },
+    "adversarial_tips": [
+      "通知程序是否符合公司章程的特别约定？",
+      "决议内容是否违反法律强制性规定？",
+      "起诉是否超过法定撤销权期限（60日）？"
+    ]
+  },
+  "commercial_contract": {
+    "name": "金融借款/商事买卖合同纠纷",
+    "description": "涉及商事主体间合同的订立、履行、违约及损失赔偿。",
+    "required_slots": {
+      "contract_evidence": { "desc": "主合同证据（借款/买卖合同文本）", "type": "evidence" },
+      "performance_evidence": { "desc": "己方履行证据（放款凭证、发货签收单）", "type": "evidence" },
+      "breach_facts": { "desc": "违约事实（逾期时间、欠款总额）", "type": "fact" },
+      "penalty_clause": { "desc": "违约金/利息约定计算标准", "type": "rule" }
+    },
+    "adversarial_tips": [
+      "合同是否存在无效事由（如名为买卖实为借贷）？",
+      "违约金是否过高请求法院予以调低？",
+      "己方是否存在先行违约或未尽减损义务？"
+    ]
+  },
+  "general_civil_case": {
+    "name": "通用民商事纠纷",
+    "description": "其他未明确案由的民商事争议，侧重基础推演。",
+    "required_slots": {
+      "parties_relation": { "desc": "当事人间的法律关系描述", "type": "fact" },
+      "claim_basis": { "desc": "请求权基础（基于合同、侵权还是不当得利）", "type": "rule" },
+      "damage_facts": { "desc": "具体的损害事实或违约现象", "type": "fact" },
+      "evidence_list": { "desc": "核心证据清单", "type": "evidence" }
+    },
+    "adversarial_tips": [
+      "诉讼主体是否适格？",
+      "诉讼时效是否届满？",
+      "是否存在交叉债权抵消的情形？"
+    ]
+  }
+}

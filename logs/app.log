@@ -1,0 +1,906 @@
+2026-04-07 11:35:38 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 11:35:38 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 11:35:58 | INFO     | [140671ec] | __main__ | GET / | Status: 200 | Latency: 0.000s
+2026-04-07 13:56:16 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 13:56:16 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 13:57:02 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 13:57:02 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 13:57:21 | INFO     | [88f7b94f] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.598s
+2026-04-07 13:57:21 | INFO     | [173596e4] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.585s
+2026-04-07 13:58:03 | INFO     | [7bd1113d] | __main__ | Accepted for background processing: 绥中长丰村镇银行股份有限公司、绥中东森休闲观光有限公司金融借款合同纠纷二审民事裁定书(FBMCLI.C.322195871).docx as case
+2026-04-07 13:58:03 | INFO     | [7bd1113d] | __main__ | POST /api/upload | Status: 200 | Latency: 0.023s
+2026-04-07 13:58:12 | INFO     | [7bd1113d] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 13:58:29 | INFO     | [7bd1113d] | app.llm | LLM Call Success | Model: deepseek-chat | Tokens: 1759 (Prompt: 1057, Completion: 702) | Latency: 18.998s
+2026-04-07 13:58:29 | ERROR    | [7bd1113d] | app.api.services | Ingestion error for 绥中长丰村镇银行股份有限公司、绥中东森休闲观光有限公司金融借款合同纠纷二审民事裁定书(FBMCLI.C.322195871).docx: Expected metadata list value for key 'elements' to be non-empty in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 85, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 201, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+        f"Expected metadata list value for key '{key}' to be non-empty"
+    )
+ValueError: Expected metadata list value for key 'elements' to be non-empty in add.
+2026-04-07 13:58:29 | INFO     | [cf70fc12] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:29 | INFO     | [510e378b] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [f30eae6a] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 13:58:29 | INFO     | [54d486ff] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:29 | INFO     | [953754a1] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [2b6e6bcf] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [96060f98] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 13:58:29 | INFO     | [2ec29bf4] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 13:58:29 | INFO     | [39b563eb] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 13:58:29 | INFO     | [33e803cc] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:29 | INFO     | [71c94c3f] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [6177c4d3] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [f89b77a4] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-07 13:58:29 | INFO     | [6f221ab6] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 13:58:29 | INFO     | [36d3de76] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:29 | INFO     | [59312ab8] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 13:58:29 | INFO     | [264e2cf1] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:29 | INFO     | [299bee64] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 13:58:29 | INFO     | [ba9a3133] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 13:58:29 | INFO     | [20b0d94d] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-07 13:58:29 | INFO     | [47b08443] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 13:58:29 | INFO     | [c54ba2e7] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 13:58:29 | INFO     | [d1181a58] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 13:58:29 | INFO     | [ab3c7c2f] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 13:58:29 | INFO     | [91b57ce9] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 13:58:29 | INFO     | [1584660b] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.008s
+2026-04-07 13:58:29 | INFO     | [7989f5e5] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 13:58:29 | INFO     | [64e5c599] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:29 | INFO     | [3c2c48c1] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 13:58:29 | INFO     | [f4826f3f] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 13:58:29 | INFO     | [278c2a25] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 13:58:29 | INFO     | [c5049a17] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 13:58:29 | INFO     | [f2452b11] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:30 | INFO     | [67c9662d] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 13:58:30 | INFO     | [063aa0d3] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:30 | INFO     | [de493e7d] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:30 | INFO     | [972d3918] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:30 | INFO     | [beed55c0] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 13:58:30 | INFO     | [341b3fd0] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:00:57 | INFO     | [8a8f570e] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 14:00:57 | INFO     | [153880bd] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:08:02 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:08:02 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:08:11 | INFO     | [f7a022a2] | __main__ | Accepted for background processing: 福瑞珂食品设备（济宁）有限公司、西藏高原蓝农业发展股份有限公司买卖合同纠纷刑事管辖管辖裁定书(FBMCLI.C.408365910).docx as case
+2026-04-07 14:08:11 | INFO     | [f7a022a2] | __main__ | POST /api/upload | Status: 200 | Latency: 0.007s
+2026-04-07 14:08:12 | INFO     | [f7a022a2] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 14:08:21 | INFO     | [f7a022a2] | app.llm | LLM Call Success | Model: deepseek-chat | Tokens: 1587 (Prompt: 1189, Completion: 398) | Latency: 9.307s
+2026-04-07 14:08:21 | ERROR    | [f7a022a2] | app.api.services | Ingestion error for 福瑞珂食品设备（济宁）有限公司、西藏高原蓝农业发展股份有限公司买卖合同纠纷刑事管辖管辖裁定书(FBMCLI.C.408365910).docx: Expected metadata list value for key 'elements' to be non-empty in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 85, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 201, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+        f"Expected metadata list value for key '{key}' to be non-empty"
+    )
+ValueError: Expected metadata list value for key 'elements' to be non-empty in add.
+2026-04-07 14:08:21 | INFO     | [e966ebe9] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [b439e390] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 14:08:21 | INFO     | [aaafa257] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [4bc6c2cb] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [3b6e60b4] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [961c6ad6] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 14:08:21 | INFO     | [74237255] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [fa4f81c4] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:08:21 | INFO     | [1b820fcc] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:08:21 | INFO     | [f030373f] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:08:21 | INFO     | [f421452e] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [d583d730] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 14:08:21 | INFO     | [f79b2b0a] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:21 | INFO     | [247412a6] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 14:08:21 | INFO     | [b8c64623] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:08:25 | INFO     | [fcf1ca59] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.004s
+2026-04-07 14:08:25 | INFO     | [cf60d6ab] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:09:30 | INFO     | [ddc6d991] | __main__ | Accepted for background processing: 贵州青龙农林股份有限公司、贵州三泰建筑工程有限责任公司建设工程施工合同纠纷二审民事裁定书(FBMCLI.C.314637653).docx as case
+2026-04-07 14:09:30 | INFO     | [ddc6d991] | __main__ | POST /api/upload | Status: 200 | Latency: 0.007s
+2026-04-07 14:09:32 | INFO     | [ddc6d991] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 14:09:44 | INFO     | [ddc6d991] | app.llm | LLM Call Success | Model: deepseek-chat | Tokens: 1345 (Prompt: 826, Completion: 519) | Latency: 12.126s
+2026-04-07 14:09:44 | ERROR    | [ddc6d991] | app.api.services | Ingestion error for 贵州青龙农林股份有限公司、贵州三泰建筑工程有限责任公司建设工程施工合同纠纷二审民事裁定书(FBMCLI.C.314637653).docx: Expected metadata list value for key 'elements' to be non-empty in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 85, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 201, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+        f"Expected metadata list value for key '{key}' to be non-empty"
+    )
+ValueError: Expected metadata list value for key 'elements' to be non-empty in add.
+2026-04-07 14:09:44 | INFO     | [ac08db8a] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [dc34fca0] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 14:09:44 | INFO     | [ef23d126] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [36e3399a] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [cda88f35] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [2c4249d5] | __main__ | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [b361006a] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 14:09:44 | INFO     | [be26db4c] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:09:44 | INFO     | [17216e3b] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 14:09:44 | INFO     | [dfc60ac9] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:09:44 | INFO     | [e5bfd0bb] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:09:44 | INFO     | [2765aa85] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [ddfb7faa] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 14:09:44 | INFO     | [b5d7d0ff] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:09:44 | INFO     | [7a46dad5] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 14:09:44 | INFO     | [999e31e7] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:09:44 | INFO     | [1d4e53fe] | __main__ | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:09:44 | INFO     | [76e87ea3] | __main__ | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:10:55 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:10:55 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:35:56 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:35:56 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:35:58 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:35:59 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:35:59 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:36:00 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:36:00 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:36:00 | INFO     | [SYSTEM] | watchfiles.main | 9 changes detected
+2026-04-07 14:36:00 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:03 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:03 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:05 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:06 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:06 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:08 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:08 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:11 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:11 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:12 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:12 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:15 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:15 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:16 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:16 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:17 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:17 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:18 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:18 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:19 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:19 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:20 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:21 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:21 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:22 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:22 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:23 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:24 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:24 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:25 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:27 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:29 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:29 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:30 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:30 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:31 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:31 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:33 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:33 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:36:34 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:49 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:39:49 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:39:50 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:52 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:39:52 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:39:52 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:39:52 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:39:53 | INFO     | [SYSTEM] | watchfiles.main | 10 changes detected
+2026-04-07 14:39:53 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:54 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:55 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:55 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:56 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:56 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:57 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:57 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:58 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:58 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:59 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:39:59 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:00 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:00 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:03 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:05 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:06 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:08 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:11 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:12 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:15 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:16 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:48 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:40:48 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:40:51 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:40:51 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:40:51 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:40:51 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:40:51 | INFO     | [SYSTEM] | watchfiles.main | 5 changes detected
+2026-04-07 14:40:52 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:53 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:53 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:54 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:54 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:55 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:55 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:56 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:56 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:57 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:57 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:58 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:58 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:59 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:40:59 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:00 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:01 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:02 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:03 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:03 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:04 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:05 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:06 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:07 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:08 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:08 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:09 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:10 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:11 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:11 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:12 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:12 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:13 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:14 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:15 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:15 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:16 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:16 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:17 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:17 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:18 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:18 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:19 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:19 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:20 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:20 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:21 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:21 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:22 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:22 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:23 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:23 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:24 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:24 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:25 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:25 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:26 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:27 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:28 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:29 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:30 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:31 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:33 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:34 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:35 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:35 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:36 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:37 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:37 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:38 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:39 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:41:39 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:27 | INFO     | [SYSTEM] | watchfiles.main | 3 changes detected
+2026-04-07 14:43:30 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:43:30 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:43:31 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:43:31 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:43:31 | INFO     | [SYSTEM] | watchfiles.main | 10 changes detected
+2026-04-07 14:43:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:32 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:33 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:33 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:34 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:34 | INFO     | [SYSTEM] | watchfiles.main | 1 change detected
+2026-04-07 14:43:38 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:43:38 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:43:39 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:43:39 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:50:49 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:50:49 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:50:50 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 14:50:50 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 14:51:02 | INFO     | [dfc8e3f3] | app.api.main | Accepted for background processing: 贵州青龙农林股份有限公司、贵州三泰建筑工程有限责任公司建设工程施工合同纠纷二审民事裁定书(FBMCLI.C.314637653).docx as case
+2026-04-07 14:51:02 | INFO     | [dfc8e3f3] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:08 | INFO     | [dfc8e3f3] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 14:51:26 | INFO     | [dfc8e3f3] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1780 (Prompt: 1043, Completion: 737) | Latency: 18.520s
+2026-04-07 14:51:26 | INFO     | [dfc8e3f3] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 14:51:27 | ERROR    | [dfc8e3f3] | app.api.services | Ingestion error for 贵州青龙农林股份有限公司、贵州三泰建筑工程有限责任公司建设工程施工合同纠纷二审民事裁定书(FBMCLI.C.314637653).docx: No field named 'elements' in <Schema: ['case_id', 'case_name', 'content', 'id', 'law_name', 'logic_type', 'metadata', 'role']>
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 85, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 215, in ingest_court_cases
+    raise e
+  File "E:\Law-judge\app\rag\retriever.py", line 209, in ingest_court_cases
+    writer.update_document(id=i, content=d, role=m.get("role", "neutral_court"), logic_type=m.get("logic_type", "court_case"),
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                          case_id=m.get("case_id"), case_name=m.get("case_name"),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                          elements=els, keywords=kws, metadata=m)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\whoosh\writing.py", line 490, in update_document
+    self.add_document(**fields)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\whoosh\writing.py", line 730, in add_document
+    self._check_fields(schema, fieldnames)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\whoosh\writing.py", line 717, in _check_fields
+    raise UnknownFieldError("No field named %r in %s"
+                            % (name, schema))
+whoosh.fields.UnknownFieldError: No field named 'elements' in <Schema: ['case_id', 'case_name', 'content', 'id', 'law_name', 'logic_type', 'metadata', 'role']>
+2026-04-07 14:51:27 | INFO     | [6198f67e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.351s
+2026-04-07 14:51:27 | INFO     | [bd8dbd28] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.351s
+2026-04-07 14:51:27 | INFO     | [54fdf61b] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:27 | INFO     | [042ed415] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:27 | INFO     | [6e24787e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [53998180] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [3630e26c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:51:27 | INFO     | [4db77def] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [b466b34d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [387ce6f8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:27 | INFO     | [6c5629df] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 14:51:27 | INFO     | [3bb9b56b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [423a41a8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [52289668] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [7c5a6f2e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [1bf35a92] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:27 | INFO     | [cfce464c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 14:51:27 | INFO     | [efe422b5] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [483bdf5d] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:51:27 | INFO     | [6de890b8] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [e38a91c2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 14:51:27 | INFO     | [a307e223] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 14:51:27 | INFO     | [d34ca3e7] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 14:51:27 | INFO     | [26743d76] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 14:51:27 | INFO     | [9a252916] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 14:51:27 | INFO     | [c40edb18] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 14:51:27 | INFO     | [ca7242c8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 14:51:27 | INFO     | [47efc700] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.015s
+2026-04-07 14:51:27 | INFO     | [ae7ccfc1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 14:51:27 | INFO     | [7b619ac4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 14:51:27 | INFO     | [8c38d9d7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 14:51:27 | INFO     | [a27a38f4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [fb7fc922] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [9f4a20af] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [bcdf75b4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [07595739] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [70e25688] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:51:27 | INFO     | [0b3d6eb5] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 14:52:23 | INFO     | [588a1c04] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 14:52:23 | INFO     | [5d9cc207] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 15:30:57 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 15:30:57 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 15:30:58 | WARNING  | [SYSTEM] | app.rag.retriever | Whoosh schema mismatch detected (missing 'elements'). Recreating index...
+2026-04-07 15:30:58 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 15:30:58 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 15:31:33 | INFO     | [0ac1d351] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.451s
+2026-04-07 15:31:33 | INFO     | [f90c1399] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:31:37 | INFO     | [8cd3a79c] | app.api.main | Accepted for background processing: 福瑞珂食品设备（济宁）有限公司、西藏高原蓝农业发展股份有限公司买卖合同纠纷刑事管辖管辖裁定书(FBMCLI.C.408365910).docx as case
+2026-04-07 15:31:37 | INFO     | [8cd3a79c] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.006s
+2026-04-07 15:31:42 | INFO     | [8cd3a79c] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 15:32:06 | INFO     | [8cd3a79c] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2532 (Prompt: 1406, Completion: 1126) | Latency: 25.319s
+2026-04-07 15:32:07 | INFO     | [8cd3a79c] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 15:32:07 | DEBUG    | [8cd3a79c] | jieba | Building prefix dict from the default dictionary ...
+2026-04-07 15:32:07 | DEBUG    | [8cd3a79c] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-07 15:32:08 | DEBUG    | [8cd3a79c] | jieba | Loading model cost 0.689 seconds.
+2026-04-07 15:32:08 | DEBUG    | [8cd3a79c] | jieba | Prefix dict has been built successfully.
+2026-04-07 15:32:08 | INFO     | [85bebdc1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [4fb7f238] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [68eaec15] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 15:32:08 | INFO     | [b939b207] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 15:32:08 | INFO     | [624d8c78] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 15:32:08 | INFO     | [55fe2e27] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [039609b5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:32:08 | INFO     | [a7ce0087] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [1a5a2349] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [e76149ac] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [68046854] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 15:32:08 | INFO     | [87ee21a0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [4d0670d9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:32:08 | INFO     | [1b48732f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:32:08 | INFO     | [6f09a8f2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:32:08 | INFO     | [7fd3fe56] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:32:08 | INFO     | [a86dc0b8] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [36e72dcc] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:32:08 | INFO     | [3187524f] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [d9197bfd] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 15:32:08 | INFO     | [0f2e4a91] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.014s
+2026-04-07 15:32:08 | INFO     | [9fdf936f] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.020s
+2026-04-07 15:32:08 | INFO     | [da634af2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.021s
+2026-04-07 15:32:08 | INFO     | [a586d660] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.023s
+2026-04-07 15:32:08 | INFO     | [3fb4228e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 15:32:08 | INFO     | [aa552a2b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:32:08 | INFO     | [68bdc1db] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [d50ac652] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:32:08 | INFO     | [b2d1e359] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [65f72391] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 15:32:08 | INFO     | [051318d0] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [07c60fff] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 15:32:08 | INFO     | [224c5c67] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [a9ebe97b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:32:08 | INFO     | [66dc091e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [a477ea7d] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 15:32:08 | INFO     | [62b151c4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [28e77dcd] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 15:32:08 | INFO     | [150b42fe] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 15:32:08 | INFO     | [68cc7d72] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:32:08 | INFO     | [5b5ae65c] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [d9e238c7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [9d61dec8] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.000s
+2026-04-07 15:32:08 | INFO     | [772cb24d] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:08 | INFO     | [d0cd336e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:32:09 | INFO     | [5accafa2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 15:32:09 | INFO     | [d0f52139] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 15:33:13 | INFO     | [fa9ffdd6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 15:33:13 | INFO     | [0464368e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 15:53:16 | INFO     | [1d309250] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-07 15:53:16 | INFO     | [98735ead] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 15:53:22 | INFO     | [53d6b42a] | app.api.main | Accepted for background processing: 吕金表、泉州市永顺纺织实业有限公司合同纠纷民事二审民事裁定书(FBMCLI.C.326213108).docx as case
+2026-04-07 15:53:22 | INFO     | [53d6b42a] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.006s
+2026-04-07 15:53:23 | INFO     | [53d6b42a] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 15:53:43 | INFO     | [53d6b42a] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2220 (Prompt: 1317, Completion: 903) | Latency: 19.669s
+2026-04-07 15:53:44 | INFO     | [53d6b42a] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 15:53:44 | INFO     | [9a16ab20] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:53:44 | INFO     | [2cb779ba] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:53:44 | INFO     | [138d7be3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 15:53:44 | INFO     | [3ce0e3fb] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 15:53:44 | INFO     | [ca014cd7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [c3efd251] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [801d255b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-07 15:53:44 | INFO     | [f3c0d807] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [b844bffc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [e1c00f10] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:53:44 | INFO     | [38843aec] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [1dfad770] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [eff9c58b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 15:53:44 | INFO     | [26cf27ba] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [772a6f74] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [c2350791] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-07 15:53:44 | INFO     | [b7d1fa84] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [351c9376] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [76a1c951] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 15:53:44 | INFO     | [29db4bbc] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [fe262413] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [412b06fe] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-07 15:53:44 | INFO     | [a4f3a8e1] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [3f573d87] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [3ce2f780] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 15:53:44 | INFO     | [678829b2] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [b97e9aa2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 15:53:44 | INFO     | [a56bfc47] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 15:53:44 | INFO     | [9da43256] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 15:53:44 | INFO     | [b71d2dca] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 15:54:15 | INFO     | [5e08a67b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 15:54:15 | INFO     | [54818ccc] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 15:54:38 | INFO     | [28cc9918] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 15:54:38 | INFO     | [63d87e39] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.013s
+2026-04-07 16:41:36 | INFO     | [dd272162] | app.api.main | Accepted for background processing: 奥基投资有限公司与上海市商务委员会经贸一审行政裁定书(FBMCLI.C.566389173).docx as case
+2026-04-07 16:41:36 | INFO     | [dd272162] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.018s
+2026-04-07 16:41:38 | INFO     | [dd272162] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 16:42:19 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 16:42:19 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 16:42:21 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 16:42:21 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 16:42:26 | INFO     | [d50446ee] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.459s
+2026-04-07 16:42:26 | INFO     | [4ddc51f8] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:42:30 | INFO     | [1eb0bdfa] | app.api.main | Accepted for background processing: 奥基投资有限公司与上海市商务委员会经贸一审行政裁定书(FBMCLI.C.566389173).docx as case
+2026-04-07 16:42:30 | INFO     | [1eb0bdfa] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.011s
+2026-04-07 16:42:37 | INFO     | [1eb0bdfa] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 16:43:19 | INFO     | [1eb0bdfa] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 4188 (Prompt: 2259, Completion: 1929) | Latency: 44.118s
+2026-04-07 16:43:20 | INFO     | [1eb0bdfa] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 16:43:20 | DEBUG    | [1eb0bdfa] | jieba | Building prefix dict from the default dictionary ...
+2026-04-07 16:43:20 | DEBUG    | [1eb0bdfa] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-07 16:43:21 | DEBUG    | [1eb0bdfa] | jieba | Loading model cost 0.810 seconds.
+2026-04-07 16:43:21 | DEBUG    | [1eb0bdfa] | jieba | Prefix dict has been built successfully.
+2026-04-07 16:43:21 | INFO     | [9f5f031b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 16:43:21 | INFO     | [799c9694] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [c101449d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [00c4b302] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.009s
+2026-04-07 16:43:21 | INFO     | [254e2afd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-07 16:43:21 | INFO     | [31e53472] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [9317f87a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [82169aeb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [371d3496] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [f834c5ad] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [0fa8201c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 16:43:21 | INFO     | [638f61d2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [5f068560] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [f2de60ec] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [35cad5ee] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [5c3f9093] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-07 16:43:21 | INFO     | [a34536c6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 16:43:21 | INFO     | [4443e6f2] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [9469f5ff] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 16:43:21 | INFO     | [d1441a60] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 16:43:21 | INFO     | [c3e743bb] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [4727fa9e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [8e618ccf] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [db48082c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 16:43:21 | INFO     | [ab1f95d8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [4477042d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [d009e58c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [cbd3e35c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.014s
+2026-04-07 16:43:21 | INFO     | [b4f0d623] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.014s
+2026-04-07 16:43:21 | INFO     | [e3d84efc] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.015s
+2026-04-07 16:43:21 | INFO     | [cd8198c4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.006s
+2026-04-07 16:43:21 | INFO     | [11158d63] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 16:43:21 | INFO     | [79f8cf58] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [58344bf3] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.026s
+2026-04-07 16:43:21 | INFO     | [a99bd966] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.026s
+2026-04-07 16:43:21 | INFO     | [f6c0171b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.027s
+2026-04-07 16:43:21 | INFO     | [7e6e3e43] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.024s
+2026-04-07 16:43:21 | INFO     | [e210fb65] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.025s
+2026-04-07 16:43:21 | INFO     | [1dcb473c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.026s
+2026-04-07 16:43:21 | INFO     | [4e1fb8d8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 16:43:21 | INFO     | [19c477e5] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.052s
+2026-04-07 16:43:21 | INFO     | [40af6630] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.053s
+2026-04-07 16:43:21 | INFO     | [cd83ba62] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.037s
+2026-04-07 16:43:21 | INFO     | [c9cbf8cd] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.039s
+2026-04-07 16:43:21 | INFO     | [a8edb332] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.040s
+2026-04-07 16:43:21 | INFO     | [ca80abc2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-07 16:43:21 | INFO     | [51802fe6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.031s
+2026-04-07 16:43:21 | INFO     | [1ac38f4d] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.032s
+2026-04-07 16:43:21 | INFO     | [ad4435ae] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-07 16:43:21 | INFO     | [f544309a] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.040s
+2026-04-07 16:43:21 | INFO     | [f614e217] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.040s
+2026-04-07 16:43:21 | INFO     | [c40aee57] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-07 16:43:21 | INFO     | [6a7b4d04] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.031s
+2026-04-07 16:43:21 | INFO     | [26e681f7] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.032s
+2026-04-07 16:43:21 | INFO     | [382ffff2] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 16:43:21 | INFO     | [3bb060ec] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 16:43:21 | INFO     | [d9942604] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 16:43:21 | INFO     | [420837da] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [d95de2d4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [188469bd] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.006s
+2026-04-07 16:43:21 | INFO     | [3521657a] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.007s
+2026-04-07 16:43:21 | INFO     | [67444e2d] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.008s
+2026-04-07 16:43:21 | INFO     | [493642a7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [887afb15] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [aa8142c7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [4e2fa445] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [437a28e1] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [ca8ed5f7] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [43b12552] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [30418199] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [8326228a] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:21 | INFO     | [f2cd26c9] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 16:43:21 | INFO     | [c5377d65] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.005s
+2026-04-07 16:43:21 | INFO     | [a6334b10] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 16:43:21 | INFO     | [87dc2f94] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 16:43:32 | INFO     | [e7313512] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 16:43:32 | INFO     | [a13816de] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:15:50 | INFO     | [200b52e8] | app.rag.retriever | Physical file permanently deleted: temp_uploads\吕金表、泉州市永顺纺织实业有限公司合同纠纷民事二审民事裁定书(FBMCLI.C.326213108).docx
+2026-04-07 17:15:50 | INFO     | [200b52e8] | app.api.main | DELETE /api/files/case/吕金表、泉州市永顺纺织实业有限公司合同纠纷民事二审民事裁定书(FBMCLI.C.326213108) | Status: 200 | Latency: 0.926s
+2026-04-07 17:15:50 | INFO     | [7d380e44] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.033s
+2026-04-07 17:15:50 | INFO     | [3101c603] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:15:55 | INFO     | [4cace676] | app.rag.retriever | Physical file permanently deleted: temp_uploads\福瑞珂食品设备（济宁）有限公司、西藏高原蓝农业发展股份有限公司买卖合同纠纷刑事管辖管辖裁定书(FBMCLI.C.408365910).docx
+2026-04-07 17:15:55 | INFO     | [4cace676] | app.api.main | DELETE /api/files/case/福瑞珂食品设备（济宁）有限公司、西藏高原蓝农业发展股份有限公司买卖合同纠纷刑事管辖管辖裁定书(FBMCLI.C.408365910) | Status: 200 | Latency: 0.296s
+2026-04-07 17:15:55 | INFO     | [d629efbc] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 17:15:55 | INFO     | [cd9042cf] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:15:58 | INFO     | [9ba0ad62] | app.rag.retriever | Physical file permanently deleted: temp_uploads\奥基投资有限公司与上海市商务委员会经贸一审行政裁定书(FBMCLI.C.566389173).docx
+2026-04-07 17:15:58 | INFO     | [9ba0ad62] | app.api.main | DELETE /api/files/case/奥基投资有限公司与上海市商务委员会经贸一审行政裁定书(FBMCLI.C.566389173) | Status: 200 | Latency: 0.273s
+2026-04-07 17:15:58 | INFO     | [7d4cc0e7] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 17:15:58 | INFO     | [ac39919d] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.006s
+2026-04-07 17:16:15 | INFO     | [9457c2ac] | app.api.main | Accepted for background processing: 乔建新与上海兴邦餐饮管理有限公司请求变更公司登记纠纷民事一审案件民事判决书(FBMCLI.C.326435807).docx as case
+2026-04-07 17:16:15 | INFO     | [9457c2ac] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.094s
+2026-04-07 17:16:17 | INFO     | [9457c2ac] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 17:17:18 | INFO     | [9457c2ac] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 5663 (Prompt: 2857, Completion: 2806) | Latency: 61.371s
+2026-04-07 17:17:19 | INFO     | [9457c2ac] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 17:17:20 | INFO     | [a72f98af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:20 | INFO     | [fec78151] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:20 | INFO     | [5f09a697] | app.api.main | Accepted for background processing: 佛山市三水德祥物业管理有限公司与刘翠华、佛山市三水德保房地产发展有限公司公司决议撤销纠纷一案民事一审裁定书(FBMCLI.C.312323961).docx as case
+2026-04-07 17:17:20 | INFO     | [0a93d644] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 17:17:20 | INFO     | [c8332365] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-07 17:17:20 | INFO     | [5f09a697] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:20 | INFO     | [9d91de28] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-07 17:17:21 | INFO     | [5f09a697] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 17:17:50 | INFO     | [5f09a697] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 5037 (Prompt: 3752, Completion: 1285) | Latency: 29.227s
+2026-04-07 17:17:50 | INFO     | [5f09a697] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 17:17:51 | INFO     | [6266d2a6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 30.966s
+2026-04-07 17:17:51 | INFO     | [dab2fea7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 30.966s
+2026-04-07 17:17:51 | INFO     | [3da422d4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 30.966s
+2026-04-07 17:17:51 | INFO     | [d3a24ef7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [090e7f98] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [e23bf2cb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [3281fe26] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [570f3660] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [08fba9f1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [170ebff2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [d457a695] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [190b6225] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [698b551d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [e7613019] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [b327f28b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [d93c1d94] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 17:17:51 | INFO     | [e16fef06] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 17:17:51 | INFO     | [6ff59281] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-07 17:17:51 | INFO     | [f76fcc52] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [db37119b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [088ab683] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 17:17:51 | INFO     | [bdb057af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 17:17:51 | INFO     | [6544d0af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 17:17:51 | INFO     | [c43a1cfe] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 17:17:51 | INFO     | [9ed676b6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [f29a6610] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [bd164abe] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [37e23ef9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-07 17:17:51 | INFO     | [8ed72555] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 17:17:51 | INFO     | [c77e4c6f] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.011s
+2026-04-07 17:17:51 | INFO     | [e7df6c4f] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [f48bad15] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [07c00494] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [d458920f] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [30ecfd5f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [15c87d88] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 17:17:51 | INFO     | [8c8279cc] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [ff1e3cf0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [3a1541c0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [23172e2a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [c802a633] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [9b004dc4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [d491de9f] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 17:17:51 | INFO     | [d8f43fee] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [03e8c753] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [1d65d4a6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 17:17:51 | INFO     | [cb107f83] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [80a9b7c6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [e21c56d4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 17:17:51 | INFO     | [e5bc149a] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [c2259b7d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [1f03649a] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 17:17:51 | INFO     | [ceb6eae2] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [c82751dd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [769d6706] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.017s
+2026-04-07 17:17:51 | INFO     | [7d49b516] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [c62ea02c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [004d8ded] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 17:17:51 | INFO     | [36a70c4b] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [76151449] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [3ee7ce38] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.041s
+2026-04-07 17:17:51 | INFO     | [19108c5e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 17:17:51 | INFO     | [69825393] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.039s
+2026-04-07 17:17:51 | INFO     | [c2a9d48d] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.047s
+2026-04-07 17:17:51 | INFO     | [49a6c2f1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.050s
+2026-04-07 17:17:51 | INFO     | [b4f047ac] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.026s
+2026-04-07 17:17:51 | INFO     | [7462f14a] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.022s
+2026-04-07 17:17:51 | INFO     | [949b3a86] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [40b3b28c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.028s
+2026-04-07 17:17:51 | INFO     | [d3024c86] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.028s
+2026-04-07 17:17:51 | INFO     | [a82dd871] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.029s
+2026-04-07 17:17:51 | INFO     | [8749bd62] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-07 17:17:51 | INFO     | [979dbec1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.020s
+2026-04-07 17:17:51 | INFO     | [085159a8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.028s
+2026-04-07 17:17:51 | INFO     | [6a5544e2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-07 17:17:51 | INFO     | [e9fd60ed] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.020s
+2026-04-07 17:17:51 | INFO     | [42c63cd8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-07 17:17:51 | INFO     | [d5e0dff4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [d002d16c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.023s
+2026-04-07 17:17:51 | INFO     | [fb1d06d2] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.017s
+2026-04-07 17:17:51 | INFO     | [64ee041f] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.018s
+2026-04-07 17:17:51 | INFO     | [869fd16b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.027s
+2026-04-07 17:17:51 | INFO     | [fe2e1f00] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-07 17:17:51 | INFO     | [c55d4f29] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.020s
+2026-04-07 17:17:51 | INFO     | [3026a6ce] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-07 17:17:51 | INFO     | [ec4cfc0b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 17:17:51 | INFO     | [6dc74ad8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.038s
+2026-04-07 17:17:51 | INFO     | [115a2894] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.039s
+2026-04-07 17:17:51 | INFO     | [bca16546] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.025s
+2026-04-07 17:17:51 | INFO     | [de8924d6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.026s
+2026-04-07 17:17:51 | INFO     | [06e8bd51] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [d6208cbd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [1edaba8b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 17:17:51 | INFO     | [7e44e506] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [3ac5ad6e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [6047815b] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [6c234953] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [857d812d] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [642d9d1e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [36ac2732] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [1de99191] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [d15d8ea4] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [52065661] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [d57f7612] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [176ceefb] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [b589e24c] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [29031a2c] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [5a410565] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [9696cb25] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [bc916932] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [d0350220] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [5122cd23] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 17:17:51 | INFO     | [84f6f4e2] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [ea190e34] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [aba7eba1] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [2b4f6e78] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [d8f7e2ab] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [809dd6ab] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [0a84f030] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [3d071679] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [f20d3e1e] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [f07e8656] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [996feeae] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [1412eaed] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 17:17:51 | INFO     | [07dae8ac] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [b191fb87] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 17:17:51 | INFO     | [18f9a0c5] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 17:17:51 | INFO     | [3bd768cd] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 17:17:51 | INFO     | [662259a0] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:17:51 | INFO     | [6031939c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-07 17:17:51 | INFO     | [bec07dab] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 17:20:51 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 17:20:51 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 17:20:53 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 17:20:53 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 17:35:21 | INFO     | [7b1cbca9] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.782s
+2026-04-07 17:35:21 | INFO     | [1f7ab2c1] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.025s
+2026-04-07 19:03:36 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 19:03:36 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 19:05:41 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 19:05:41 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 19:05:42 | WARNING  | [SYSTEM] | app.rag.retriever | Whoosh schema mismatch detected. Recreating index...
+2026-04-07 19:05:43 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 19:05:43 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 19:05:51 | INFO     | [f6378ac8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.519s
+2026-04-07 19:05:57 | INFO     | [71dac3fe] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 19:05:59 | INFO     | [94a822fa] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 19:06:08 | INFO     | [dac0eed7] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 19:35:43 | INFO     | [5239b2d7] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.303s
+2026-04-07 19:35:43 | INFO     | [fd12f7b8] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.071s
+2026-04-07 19:35:49 | INFO     | [908c2457] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-07 19:35:49 | INFO     | [f2e72551] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 19:35:57 | INFO     | [f318dced] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 19:35:57 | INFO     | [304ca3b6] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
