@@ -1,0 +1,30 @@
+[
+  {
+    "turn": 1,
+    "user_input": "我想起诉对方违约，请帮我分析",
+    "phase": "evidence_exchange",
+    "evidence_round": 1,
+    "ai_output": "请补充违约发生时间和催告记录。"
+  },
+  {
+    "turn": 2,
+    "user_input": "补充：合同已签署，对方应于2025-03-01付款但未付款，我方有合同和银行流水。",
+    "phase": "awaiting_final_call_response",
+    "evidence_round": 1,
+    "ai_output": "【最后通牒：事实确认】\n当前已收集的核心事实与证据：\n  [已证明] 要素[contract_evidence]：已签合同（证据: 已签合同）\n  [已证明] 要素[performance_evidence]：已付款流水（证据: 已付款流水）\n  [已证明] 被告逾期付款（证据: 催告函）\n\n请确认是否还有新的关键事实或证据需要补充。\n若确认完整，将进入法庭辩论阶段。（回复“确认”或继续补充）\n"
+  },
+  {
+    "turn": 3,
+    "user_input": "确认",
+    "phase": "awaiting_snapshot_confirmation",
+    "evidence_round": 1,
+    "ai_output": "【庭审事实确认书（事实快照）】\n案件概述：我想起诉对方违约，请帮我分析\n\n一、已初步证明的事实：\n  [已证明] 要素[contract_evidence]：已签合同\n     证据: 已签合同\n  [已证明] 要素[performance_evidence]：已付款流水\n     证据: 已付款流水\n  [已证明] 被告逾期付款\n     证据: 催告函\n\n二、仍有争议或证据不足的事实：\n  （无）\n\n三、被告侧可能抗辩要点：\n  - 违约责任条款存在解释空间\n  - 对方可能主张未到期\n\n以上内容将作为后续辩论与裁判依据。请回复“确认”进入庭审。\n"
+  },
+  {
+    "turn": 4,
+    "user_input": "确认",
+    "phase": "completed",
+    "evidence_round": 1,
+    "ai_output": "裁判文书已生成：\n\n[mock-narrative-output]"
+  }
+]

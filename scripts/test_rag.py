@@ -1,28 +1,21 @@
+import os
+import pytest
+
 from app.rag.retriever import HybridRetriever
-import json
 
-def test():
+
+pytestmark = pytest.mark.integration
+
+
+@pytest.mark.skipif(
+    os.getenv("RUN_INTEGRATION") != "1",
+    reason="Set RUN_INTEGRATION=1 to run real RAG integration test.",
+)
+def test_rag_search_smoke():
     retriever = HybridRetriever()
-    query = "马来西亚 股权转让 退股协议 是否有效"
-    
-    print(f"--- 正在执行 RRF 混合检索测试: {query} ---")
+    query = "外商投资 股权转让 协议效力"
     results = retriever.search_all(query_text=query, n_results=3)
-    
-    # 验证法条召回
-    print(f"\n[法条召回数量]: {len(results['law_articles'])}")
-    for r in results['law_articles']:
-        print(f"  - {r.metadata.get('law_name')}: Score {r.score:.4f}")
 
-    # 验证判例召回与序列补全
-    print(f"\n[判例召回数量]: {len(results['court_cases'])}")
-    for r in results['court_cases']:
-        print(f"  - [{r.metadata.get('case_name')}]: Score {r.score:.4f}")
-        print(f"    内容预览(前100字): {r.content[:100]}...")
-        
-    # 验证 Prompt 格式化
-    context = retriever.format_context_for_prompt(results)
-    print("\n\n--- 最终喂给 AI 的 Context 预览 ---")
-    print(context[:500])
-
-if __name__ == "__main__":
-    test()
+    assert isinstance(results, dict)
+    assert "law_articles" in results
+    assert "court_cases" in results

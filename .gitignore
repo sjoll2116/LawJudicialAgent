@@ -1,2 +1,14 @@
-/.env
+.env
 /法律条款
+
+__pycache__/
+.pytest_cache/
+pytest-cache-files-*/
+*.pyc
+
+chunks_debug.txt
+extracted_laws.txt
+test_output.txt
+test_output_utf8.txt
+test_result.txt
+*.sqlite3-journal

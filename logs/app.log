@@ -904,3 +904,794 @@ whoosh.fields.UnknownFieldError: No field named 'elements' in <Schema: ['case_id
 2026-04-07 19:35:49 | INFO     | [f2e72551] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
 2026-04-07 19:35:57 | INFO     | [f318dced] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
 2026-04-07 19:35:57 | INFO     | [304ca3b6] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 22:51:19 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 22:51:19 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 22:51:20 | WARNING  | [SYSTEM] | app.rag.retriever | Whoosh schema mismatch detected. Recreating index...
+2026-04-07 22:51:21 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 22:51:21 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 22:51:39 | INFO     | [0eb50127] | app.rag.retriever | Physical file permanently deleted: temp_uploads\乔建新与上海兴邦餐饮管理有限公司请求变更公司登记纠纷民事一审案件民事判决书(FBMCLI.C.326435807).docx
+2026-04-07 22:51:39 | INFO     | [0eb50127] | app.api.main | DELETE /api/files/case/乔建新与上海兴邦餐饮管理有限公司请求变更公司登记纠纷民事一审案件民事判决书(FBMCLI.C.326435807) | Status: 200 | Latency: 0.771s
+2026-04-07 22:51:39 | INFO     | [e8a922d9] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.045s
+2026-04-07 22:51:39 | INFO     | [cc6972dc] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 22:51:41 | INFO     | [d6765208] | app.rag.retriever | Physical file permanently deleted: temp_uploads\佛山市三水德祥物业管理有限公司与刘翠华、佛山市三水德保房地产发展有限公司公司决议撤销纠纷一案民事一审裁定书(FBMCLI.C.312323961).docx
+2026-04-07 22:51:41 | INFO     | [d6765208] | app.api.main | DELETE /api/files/case/佛山市三水德祥物业管理有限公司与刘翠华、佛山市三水德保房地产发展有限公司公司决议撤销纠纷一案民事一审裁定书(FBMCLI.C.312323961) | Status: 200 | Latency: 0.287s
+2026-04-07 22:51:41 | INFO     | [cdbb02ef] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 22:51:41 | INFO     | [f1d4f0a3] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.002s
+2026-04-07 22:51:45 | INFO     | [fa95e6d6] | app.rag.retriever | Physical file permanently deleted: temp_uploads\外商投资法司法解释.docx
+2026-04-07 22:51:45 | INFO     | [fa95e6d6] | app.api.main | DELETE /api/files/law/外商投资法司法解释 | Status: 200 | Latency: 0.055s
+2026-04-07 22:51:45 | INFO     | [cf8d8332] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 22:51:45 | INFO     | [f2eafc12] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.003s
+2026-04-07 22:52:05 | INFO     | [6136a1bc] | app.api.main | Accepted for background processing: 外商投资法司法解释.docx as interpretation
+2026-04-07 22:52:05 | INFO     | [6136a1bc] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.005s
+2026-04-07 22:52:11 | ERROR    | [6136a1bc] | app.api.services | Ingestion error for 外商投资法司法解释.docx: Expected metadata list value for key 'related_articles' to be non-empty in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 215, in ingest_file
+    self.retriever.ingest_law_articles(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 407, in ingest_law_articles
+    self._law_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+        f"Expected metadata list value for key '{key}' to be non-empty"
+    )
+ValueError: Expected metadata list value for key 'related_articles' to be non-empty in add.
+2026-04-07 22:52:11 | INFO     | [4b82a6fa] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 22:52:11 | INFO     | [dc098337] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 22:52:58 | INFO     | [9b7a7e22] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 22:52:58 | INFO     | [fdeef214] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.006s
+2026-04-07 22:53:11 | INFO     | [843107e4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 22:53:11 | INFO     | [92dd4835] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 22:56:58 | INFO     | [475d3fd3] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.200s
+2026-04-07 22:56:58 | INFO     | [0c3b4cdc] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.025s
+2026-04-07 22:57:07 | INFO     | [dc12283c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-07 22:57:07 | INFO     | [48ff0e19] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.001s
+2026-04-07 22:57:09 | INFO     | [6579315a] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-07 22:57:09 | INFO     | [289651b9] | app.api.main | GET /api/metadata/registry | Status: 200 | Latency: 0.004s
+2026-04-07 22:57:13 | INFO     | [f5d7f895] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 23:07:25 | INFO     | [b47b4339] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.029s
+2026-04-07 23:07:25 | INFO     | [1fc4b24b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.008s
+2026-04-07 23:08:20 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:08:20 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:08:21 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:08:21 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:08:29 | INFO     | [bccdb0bf] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.418s
+2026-04-07 23:08:29 | INFO     | [61a534f9] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 23:08:32 | INFO     | [28dcf6da] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.007s
+2026-04-07 23:08:32 | INFO     | [f3fb9e35] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 23:08:52 | INFO     | [446da76c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.004s
+2026-04-07 23:09:07 | INFO     | [b27d7bb0] | app.api.main | Accepted for background processing: 冯三利与龙门汇成投资有限公司请求变更公司登记纠纷一审民事判决书(FBMCLI.C.321868582).docx as case
+2026-04-07 23:09:07 | INFO     | [b27d7bb0] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.006s
+2026-04-07 23:09:15 | INFO     | [b27d7bb0] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:10:24 | INFO     | [b27d7bb0] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 6235 (Prompt: 3014, Completion: 3221) | Latency: 71.168s
+2026-04-07 23:10:24 | ERROR    | [b27d7bb0] | app.api.services | Ingestion error for 冯三利与龙门汇成投资有限公司请求变更公司登记纠纷一审民事判决书(FBMCLI.C.321868582).docx: Expected metadata list value for key 'secondary_types' to be non-empty in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 197, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 429, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+        f"Expected metadata list value for key '{key}' to be non-empty"
+    )
+ValueError: Expected metadata list value for key 'secondary_types' to be non-empty in add.
+2026-04-07 23:10:24 | INFO     | [b16f59ef] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [69fd3e3b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [3782a4f1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [f7c74690] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:10:24 | INFO     | [e2c72213] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:10:24 | INFO     | [71369e86] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:10:24 | INFO     | [0be73925] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [8df54fb1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [ee492843] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [3d7e3c05] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [41b9f5fe] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [4492dd5e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [40ac5934] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [2090d791] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:10:24 | INFO     | [1c6d0705] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [a84de066] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [20e8d4f3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [8f07e286] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [31f0eb36] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [ab3110cc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [aeae6c77] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:10:24 | INFO     | [f6a56013] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [26019255] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [2d0539e4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [5d77260f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [227e8d66] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [62c0c0d9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [d4ed1b24] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:10:24 | INFO     | [fdb01cb4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:10:24 | INFO     | [a08a2ace] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:10:24 | INFO     | [d1811e68] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:10:24 | INFO     | [49e1111e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:10:24 | INFO     | [acbbb43b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [ec5afc48] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:10:24 | INFO     | [8c55f6c3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:10:24 | INFO     | [b35f46ba] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:10:24 | INFO     | [a11047af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:10:24 | INFO     | [45345fda] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:11:15 | INFO     | [763a8e05] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.004s
+2026-04-07 23:43:13 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:43:13 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:43:15 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:43:15 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:43:20 | INFO     | [bf466cb8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.479s
+2026-04-07 23:43:20 | INFO     | [3ce7dbc4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.006s
+2026-04-07 23:43:29 | INFO     | [83f8a655] | app.api.main | Accepted for background processing: 沈阳嘉益置业有限公司、大连吉星国际贸易有限公司等储蓄存款合同纠纷民事一审民事裁定书(FBMCLI.C.326273968).docx as case
+2026-04-07 23:43:29 | INFO     | [83f8a655] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.009s
+2026-04-07 23:43:36 | INFO     | [83f8a655] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:44:04 | INFO     | [83f8a655] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2570 (Prompt: 1273, Completion: 1297) | Latency: 29.489s
+2026-04-07 23:44:04 | ERROR    | [83f8a655] | app.api.services | Ingestion error for 沈阳嘉益置业有限公司、大连吉星国际贸易有限公司等储蓄存款合同纠纷民事一审民事裁定书(FBMCLI.C.326273968).docx: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《最高人民法院关于明确第一审涉外民商事案件级别管辖标准以及归口办理有关问题的通知》', 'article': '第二条', 'source_text': '下列案件由涉外审判庭或专门合议庭审理:(一)当事人一方或者双方是外国人、无国籍人、外国企业或者组织，或者当事人一方或者双方的经常居所地在中华人民共和国领域外的民商事案件；……(三)外商投资企业设立、出资、确认股东资格、分配利润、合并、分立、解散等与该企业有关的民商事案件；……'}, {'law_name': '《辽宁省高级人民法院关于调整我省涉外民商事案件管辖的通知》', 'article': '', 'source_text': '原由沈阳经济技术开发区人民法院和沈阳高新技术产业开发区人民法院受理的一审涉外民商事案件，调整为统一由沈阳高新技术产业开发区人民法院管辖。沈阳高新技术产业开发区人民法院管辖沈阳市以及抚顺市、本溪市、锦州市、葫芦岛市、铁岭市、阜新市、朝阳市标的额1000万元以下的第一审涉外民商事案件；沈阳市中级人民法院管辖相应二审案件，以及上述地区标的额1000万元以上、8000万元以下的一审涉外民商事案件。'}] in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 197, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 429, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1051, in _validate_metadata_list_value
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《最高人民法院关于明确第一审涉外民商事案件级别管辖标准以及归口办理有关问题的通知》', 'article': '第二条', 'source_text': '下列案件由涉外审判庭或专门合议庭审理:(一)当事人一方或者双方是外国人、无国籍人、外国企业或者组织，或者当事人一方或者双方的经常居所地在中华人民共和国领域外的民商事案件；……(三)外商投资企业设立、出资、确认股东资格、分配利润、合并、分立、解散等与该企业有关的民商事案件；……'}, {'law_name': '《辽宁省高级人民法院关于调整我省涉外民商事案件管辖的通知》', 'article': '', 'source_text': '原由沈阳经济技术开发区人民法院和沈阳高新技术产业开发区人民法院受理的一审涉外民商事案件，调整为统一由沈阳高新技术产业开发区人民法院管辖。沈阳高新技术产业开发区人民法院管辖沈阳市以及抚顺市、本溪市、锦州市、葫芦岛市、铁岭市、阜新市、朝阳市标的额1000万元以下的第一审涉外民商事案件；沈阳市中级人民法院管辖相应二审案件，以及上述地区标的额1000万元以上、8000万元以下的一审涉外民商事案件。'}] in add.
+2026-04-07 23:44:04 | INFO     | [fe29f77c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:04 | INFO     | [f7ec1316] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:44:04 | INFO     | [188b9b67] | app.api.main | Accepted for background processing: 惠州晖鸿工艺品有限公司、香港旋晖有限公司等合同纠纷民事裁定书(FBMCLI.C.324414265).docx as case
+2026-04-07 23:44:04 | INFO     | [0bda4140] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-07 23:44:04 | INFO     | [1b8e29d2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-07 23:44:04 | INFO     | [188b9b67] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.018s
+2026-04-07 23:44:04 | INFO     | [86319364] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-07 23:44:04 | INFO     | [a4f9029c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:44:06 | INFO     | [188b9b67] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:44:57 | INFO     | [188b9b67] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 4291 (Prompt: 1983, Completion: 2308) | Latency: 51.658s
+2026-04-07 23:44:57 | ERROR    | [188b9b67] | app.api.services | Ingestion error for 惠州晖鸿工艺品有限公司、香港旋晖有限公司等合同纠纷民事裁定书(FBMCLI.C.324414265).docx: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《中华人民共和国民事诉讼法》', 'article': '第二百条第二项、第六项', 'source_text': '依据《中华人民共和国民事诉讼法》第二百条第二项、第六项之规定申请再审。'}] in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 197, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 429, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1051, in _validate_metadata_list_value
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《中华人民共和国民事诉讼法》', 'article': '第二百条第二项、第六项', 'source_text': '依据《中华人民共和国民事诉讼法》第二百条第二项、第六项之规定申请再审。'}] in add.
+2026-04-07 23:44:57 | INFO     | [60460ecf] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 52.694s
+2026-04-07 23:44:57 | INFO     | [f54b2665] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [0adf6681] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [4e73f134] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:44:57 | INFO     | [8756ea57] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:44:57 | INFO     | [6ae43ba6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 23:44:57 | INFO     | [92d752d4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [b483e1bc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [c43960d6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [56d4b298] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [51b47766] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [4d3e8d8d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [b9eda35b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [e0601a5d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [bbecdbdc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [d484de51] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [9b39d896] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [8c977410] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [c273c055] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [ed90deee] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:44:57 | INFO     | [550558c9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:44:57 | INFO     | [087426be] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:44:57 | INFO     | [0b58470a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [a2e753eb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [117a6eb0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [40b5969d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [c2e74bd7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [e2e3c40e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [caa05ecf] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:44:57 | INFO     | [01a7be40] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [0660826c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [5129a8d3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:44:57 | INFO     | [63a79d94] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:44:57 | INFO     | [8a3d037e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:44:57 | INFO     | [241c40be] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [0cfe1efb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:44:57 | INFO     | [f3364d5b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:45:59 | INFO     | [ad6535ea] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.005s
+2026-04-07 23:54:46 | INFO     | [fd784bab] | app.api.main | Accepted for background processing: 绥中长丰村镇银行股份有限公司、绥中东森休闲观光有限公司金融借款合同纠纷二审民事裁定书(FBMCLI.C.322195871).docx as case
+2026-04-07 23:54:46 | INFO     | [fd784bab] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.004s
+2026-04-07 23:54:48 | INFO     | [fd784bab] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:55:14 | INFO     | [fd784bab] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2499 (Prompt: 1279, Completion: 1220) | Latency: 26.993s
+2026-04-07 23:55:14 | ERROR    | [fd784bab] | app.api.services | Ingestion error for 绥中长丰村镇银行股份有限公司、绥中东森休闲观光有限公司金融借款合同纠纷二审民事裁定书(FBMCLI.C.322195871).docx: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '最高人民法院《关于第一审涉外民商事案件级别管辖标准以及归口办理有关问题的通知》', 'article': '第二条', 'source_text': '下列案件由涉外审判庭或专门合议庭审理：(一)当事人一方或者双方是外国人、无国籍人、外国企业或者组织，或者当事人一方或者双方的经常居所地在中华人民共和国领域外的民商事案件；(二)产生、变更或者消灭民事关系的法律事实发生在中华人民共和国领域外，或者标的物在中华人民共和国领域外的民商事案件；(三)外商投资企业设立、出资、确认股东资格、分配利润、合并、分立、解散等与该企业有关的民商事案件；(四)一方当事人为外商独资企业的民商事案件。'}] in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 197, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 429, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1051, in _validate_metadata_list_value
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '最高人民法院《关于第一审涉外民商事案件级别管辖标准以及归口办理有关问题的通知》', 'article': '第二条', 'source_text': '下列案件由涉外审判庭或专门合议庭审理：(一)当事人一方或者双方是外国人、无国籍人、外国企业或者组织，或者当事人一方或者双方的经常居所地在中华人民共和国领域外的民商事案件；(二)产生、变更或者消灭民事关系的法律事实发生在中华人民共和国领域外，或者标的物在中华人民共和国领域外的民商事案件；(三)外商投资企业设立、出资、确认股东资格、分配利润、合并、分立、解散等与该企业有关的民商事案件；(四)一方当事人为外商独资企业的民商事案件。'}] in add.
+2026-04-07 23:55:14 | INFO     | [cd75d2bb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:55:14 | INFO     | [e920c075] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:55:14 | INFO     | [adbf6047] | app.api.main | Accepted for background processing: 毅添实业(上海)有限公司与上海市松江区人民政府行政其他二审行政判决书(FBMCLI.C.566437945).docx as case
+2026-04-07 23:55:14 | INFO     | [d1adc4dd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:55:14 | INFO     | [adbf6047] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.008s
+2026-04-07 23:55:16 | INFO     | [adbf6047] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:56:29 | INFO     | [adbf6047] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 5844 (Prompt: 2327, Completion: 3517) | Latency: 73.761s
+2026-04-07 23:56:29 | ERROR    | [adbf6047] | app.api.services | Ingestion error for 毅添实业(上海)有限公司与上海市松江区人民政府行政其他二审行政判决书(FBMCLI.C.566437945).docx: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《中华人民共和国外商投资法》', 'article': '', 'source_text': '国家对外国投资者的投资不实行征收，在特殊情况下，国家为了公共利益的需要，征收、征用应当依照法定程序进行，并及时给予公平、合理的补偿'}] in add.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 197, in ingest_file
+    self.retriever.ingest_court_cases(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 429, in ingest_court_cases
+    self._case_vect.add(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 107, in add
+    add_request = self._validate_and_prepare_add_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 235, in _validate_and_prepare_add_request
+    validate_insert_record_set(record_set=add_records)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 1051, in _validate_metadata_list_value
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Expected metadata list value for key 'legal_refs' to contain only str, int, float, or bool and all elements must be the same type, got [{'law_name': '《中华人民共和国外商投资法》', 'article': '', 'source_text': '国家对外国投资者的投资不实行征收，在特殊情况下，国家为了公共利益的需要，征收、征用应当依照法定程序进行，并及时给予公平、合理的补偿'}] in add.
+2026-04-07 23:56:29 | INFO     | [48c96380] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 74.823s
+2026-04-07 23:56:29 | ERROR    | [SYSTEM] | asyncio | Exception in callback BaseProactorEventLoop._start_serving.<locals>.loop() at C:\Python313\Lib\asyncio\proactor_events.py:842
+handle: <Handle BaseProactorEventLoop._start_serving.<locals>.loop() at C:\Python313\Lib\asyncio\proactor_events.py:842>
+Traceback (most recent call last):
+  File "C:\Python313\Lib\asyncio\events.py", line 89, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 857, in loop
+    self._make_socket_transport(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        conn, protocol,
+        ^^^^^^^^^^^^^^^
+        extra={'peername': addr}, server=server)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 646, in _make_socket_transport
+    return _ProactorSocketTransport(self, sock, protocol, waiter,
+                                    extra, server)
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 612, in __init__
+    super().__init__(loop, sock, protocol, waiter, extra, server)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 189, in __init__
+    super().__init__(loop, sock, protocol, waiter, extra, server)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 335, in __init__
+    super().__init__(*args, **kw)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\proactor_events.py", line 66, in __init__
+    self._server._attach(self)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 297, in _attach
+    assert self._sockets is not None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+2026-04-07 23:56:29 | INFO     | [1dd5560b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.014s
+2026-04-07 23:56:29 | INFO     | [dad4a4a1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.014s
+2026-04-07 23:56:29 | INFO     | [7d9bb385] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.015s
+2026-04-07 23:56:29 | INFO     | [c1c1239e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:56:49 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:56:49 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:56:51 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:56:51 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:58:05 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:58:05 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:58:07 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-07 23:58:07 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-07 23:58:10 | INFO     | [8c14cb4e] | app.api.main | Accepted for background processing: 贵州青龙农林股份有限公司、贵州三泰建筑工程有限责任公司建设工程施工合同纠纷二审民事裁定书(FBMCLI.C.314637653).docx as case
+2026-04-07 23:58:10 | INFO     | [8c14cb4e] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.010s
+2026-04-07 23:58:19 | INFO     | [8c14cb4e] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:58:43 | INFO     | [8c14cb4e] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2136 (Prompt: 1048, Completion: 1088) | Latency: 25.956s
+2026-04-07 23:58:44 | INFO     | [8c14cb4e] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 23:58:44 | DEBUG    | [8c14cb4e] | jieba | Building prefix dict from the default dictionary ...
+2026-04-07 23:58:44 | DEBUG    | [8c14cb4e] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-07 23:58:45 | DEBUG    | [8c14cb4e] | jieba | Loading model cost 0.764 seconds.
+2026-04-07 23:58:45 | DEBUG    | [8c14cb4e] | jieba | Prefix dict has been built successfully.
+2026-04-07 23:58:45 | INFO     | [c06a9d0d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:58:45 | INFO     | [2bea34e2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:58:45 | INFO     | [c8aed5b3] | app.api.main | Accepted for background processing: 沈阳嘉益置业有限公司、大连吉星国际贸易有限公司等储蓄存款合同纠纷民事一审民事裁定书(FBMCLI.C.326273968).docx as case
+2026-04-07 23:58:45 | INFO     | [586498af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:58:45 | INFO     | [60f298ae] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:58:45 | INFO     | [c8aed5b3] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.010s
+2026-04-07 23:58:45 | INFO     | [acb7c3f7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-07 23:58:46 | INFO     | [c8aed5b3] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 23:59:15 | INFO     | [c8aed5b3] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 2603 (Prompt: 1273, Completion: 1330) | Latency: 29.459s
+2026-04-07 23:59:15 | INFO     | [c8aed5b3] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-07 23:59:15 | INFO     | [c455267a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 30.843s
+2026-04-07 23:59:15 | INFO     | [22d613b3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 30.842s
+2026-04-07 23:59:15 | INFO     | [afdddd38] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:59:15 | INFO     | [871b7eac] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:15 | INFO     | [e499a8ca] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:15 | INFO     | [5bfe3b62] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:59:15 | INFO     | [d2f07270] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:59:15 | INFO     | [680b3ac5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-07 23:59:15 | INFO     | [ce97a147] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:59:15 | INFO     | [5d152a73] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:59:15 | INFO     | [ce0b1376] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:59:15 | INFO     | [f99fb109] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:59:15 | INFO     | [85bcd723] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:15 | INFO     | [1087947b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:16 | INFO     | [7ebfad60] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:59:16 | INFO     | [6202074b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:59:16 | INFO     | [3925ea11] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-07 23:59:16 | INFO     | [cc14dfb0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-07 23:59:16 | INFO     | [f23ad86d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:59:16 | INFO     | [c9b32016] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:16 | INFO     | [d0290698] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-07 23:59:16 | INFO     | [d9792607] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:16 | INFO     | [53744489] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-07 23:59:16 | INFO     | [3637985d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-07 23:59:16 | INFO     | [9831a299] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:15:47 | INFO     | [2b61aae1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.095s
+2026-04-08 00:19:11 | INFO     | [00cf9520] | app.api.main | Accepted for background processing: 如皋市金鼎置业有限公司等与吴良好等股东资格确认纠纷申请再审案(FBMCLI.C.325624524).docx as case
+2026-04-08 00:19:11 | INFO     | [00cf9520] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.051s
+2026-04-08 00:19:13 | INFO     | [00cf9520] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:20:31 | INFO     | [00cf9520] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 6633 (Prompt: 3001, Completion: 3632) | Latency: 78.210s
+2026-04-08 00:20:31 | INFO     | [00cf9520] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:20:32 | INFO     | [a800ba57] | app.api.main | Accepted for background processing: 上海农村商业银行股份有限公司浦东分行与上海浩泽净水科技发展有限公司、陕西浩泽环保科技发展有限公司金融借款合同纠纷一审...(FBMCLI.C.313694972).docx as case
+2026-04-08 00:20:32 | INFO     | [841078c4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.009s
+2026-04-08 00:20:32 | INFO     | [39e491db] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-08 00:20:32 | INFO     | [a800ba57] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.018s
+2026-04-08 00:20:32 | INFO     | [19967904] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:20:32 | INFO     | [fc3b4b75] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:20:33 | INFO     | [a800ba57] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:21:14 | INFO     | [a800ba57] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 5209 (Prompt: 3338, Completion: 1871) | Latency: 41.231s
+2026-04-08 00:21:14 | INFO     | [a800ba57] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:21:15 | INFO     | [00bb4b54] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 42.871s
+2026-04-08 00:21:15 | INFO     | [3e7110bf] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [ac60af8b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [00ee0cb7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:21:15 | INFO     | [cf4feca6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-08 00:21:15 | INFO     | [9dc30136] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-08 00:21:15 | INFO     | [fd3c44d2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:21:15 | INFO     | [fa1f05af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [d34ade20] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [e94461d2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [4487d5a0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [f88a5066] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [55c171af] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [612276e5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [10f2d993] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [7ab9a0a8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [3c81f079] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [97741f82] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [62845e61] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [5dfaf650] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [a32ef367] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [08e64922] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [d7f323ae] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [f388f322] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:21:15 | INFO     | [bce4be84] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [549a607e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [7ee15c02] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:21:15 | INFO     | [af2c7401] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:21:15 | INFO     | [ed425212] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:21:15 | INFO     | [cb286ff7] | app.api.main | Accepted for background processing: 深圳市爱品生电子科技有限公司、张马金等合同纠纷民事二审民事判决书(FBMCLI.C.412056562).docx as case
+2026-04-08 00:21:15 | INFO     | [b0afce49] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-08 00:21:15 | INFO     | [a62bc9ac] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-08 00:21:15 | INFO     | [cb286ff7] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.015s
+2026-04-08 00:21:15 | INFO     | [c38a770a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.009s
+2026-04-08 00:21:16 | INFO     | [cb286ff7] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:22:48 | INFO     | [cb286ff7] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 8074 (Prompt: 3978, Completion: 4096) | Latency: 92.411s
+2026-04-08 00:22:48 | ERROR    | [cb286ff7] | app.rag.law_processor | LLM distillation failed (JSON Mode error): Unterminated string starting at: line 77 column 24 (char 8271)
+2026-04-08 00:22:48 | INFO     | [debbe273] | app.api.main | GET /api/chunks | Status: 200 | Latency: 93.518s
+2026-04-08 00:22:48 | INFO     | [b562cc2b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 93.519s
+2026-04-08 00:22:48 | INFO     | [1a8ba4d0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.009s
+2026-04-08 00:22:48 | INFO     | [76cc7c9b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-08 00:22:48 | INFO     | [c0d0691d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-08 00:22:48 | INFO     | [35f5028f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-08 00:22:48 | INFO     | [420ddf3c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:22:48 | INFO     | [e387dff8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:22:48 | INFO     | [dd64e7fa] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:22:48 | INFO     | [dc2c5dd8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-08 00:22:48 | INFO     | [208f6898] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:22:48 | INFO     | [59527721] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:22:48 | INFO     | [aa269900] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:22:48 | INFO     | [941e6cae] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.014s
+2026-04-08 00:22:48 | INFO     | [73509186] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.015s
+2026-04-08 00:22:48 | INFO     | [aefe5ebd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.016s
+2026-04-08 00:22:48 | INFO     | [c33de992] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-08 00:22:48 | INFO     | [d3a937da] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.012s
+2026-04-08 00:22:48 | INFO     | [ca0b216d] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-08 00:22:48 | INFO     | [4b202118] | app.api.main | Accepted for background processing: 郑州荣某某电能源有限公司、远地发展有限公司债权人代位权纠纷再审审查与审判监督民事裁定书(FBMCLI.C.316096148).docx as case
+2026-04-08 00:22:48 | INFO     | [142eb366] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.009s
+2026-04-08 00:22:48 | INFO     | [4ed6b88b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:22:48 | INFO     | [4b202118] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.032s
+2026-04-08 00:22:48 | INFO     | [5de19aa6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.018s
+2026-04-08 00:22:48 | INFO     | [f8dd8afa] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-08 00:22:50 | INFO     | [4b202118] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:23:43 | INFO     | [4b202118] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 6360 (Prompt: 4230, Completion: 2130) | Latency: 53.635s
+2026-04-08 00:23:43 | INFO     | [4b202118] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:23:44 | INFO     | [b8f56fed] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:23:44 | INFO     | [b95ecbed] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:23:44 | INFO     | [10ed1c1d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:23:44 | INFO     | [183b166a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:23:44 | INFO     | [837c7ba0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:23:44 | INFO     | [bf387d90] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:23:44 | INFO     | [686b7ff9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [fa9d7a0c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [241a356f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [078330db] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [5b2fa31d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [d96a7384] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [62295a25] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [165c4a63] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [ad57b924] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [9da45ccd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [e1580c57] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [5074ab51] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [6e6ea3b2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [3a3f3067] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [83769767] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [6038ba47] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [867664b8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [498de679] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [b3f35498] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [39b292db] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [7f81b603] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [8d2b9bf3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [f4bca254] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [30ccb6e4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [48b907c4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [0ecaef7d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [eff3726c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [dbe97e92] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [babf5440] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [f160ed86] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [da96abc6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [0c04306d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [37b0183a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [65073d74] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [60a8aefc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [2bc3ecb6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [82163224] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:23:44 | INFO     | [8d237a7b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:23:44 | INFO     | [90e94a03] | app.api.main | Accepted for background processing: 原告罗田安与被告南京克莉丝汀食品有限公司决议效力确认纠纷一案的民事判决书(FBMCLI.C.407451668).docx as case
+2026-04-08 00:23:44 | INFO     | [ca56f2e8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:23:44 | INFO     | [90e94a03] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.012s
+2026-04-08 00:23:44 | INFO     | [5d0c4d98] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:23:44 | INFO     | [973110e8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:23:44 | INFO     | [b751179a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:23:45 | INFO     | [90e94a03] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:25:28 | INFO     | [90e94a03] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 8583 (Prompt: 4487, Completion: 4096) | Latency: 103.173s
+2026-04-08 00:25:28 | ERROR    | [90e94a03] | app.rag.law_processor | LLM distillation failed (JSON Mode error): Unterminated string starting at: line 99 column 32 (char 8612)
+2026-04-08 00:25:28 | INFO     | [24ac23dc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 104.092s
+2026-04-08 00:25:28 | INFO     | [e1240fdb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [2d17b79a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:25:28 | INFO     | [28709287] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-08 00:25:28 | INFO     | [727e4d33] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.010s
+2026-04-08 00:25:28 | INFO     | [8d9aed75] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:25:28 | INFO     | [a8df4847] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [28e4038c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:25:28 | INFO     | [0b72d3ed] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.007s
+2026-04-08 00:25:28 | INFO     | [3bd8ec30] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:25:28 | INFO     | [47d4cb54] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:25:28 | INFO     | [2efcb771] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [b6ad52bb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [468b1231] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [f351297f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [a3ff6d52] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [68b92518] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [b3938739] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [112ea982] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [2743bb80] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [1067bf75] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [74b753e0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [ad12c0be] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [58a4de60] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [3950b9a8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [b837cced] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [ed0da5cb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [43bb8a18] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [6ef09eda] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [6d81c593] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [f2d2f7f1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [9a119ef1] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [88dceabd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [0e65f106] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [712a8e93] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [3efdc103] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [163045ad] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:25:28 | INFO     | [41d5c601] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:25:28 | INFO     | [01bcbc48] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [5e1f7edd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [ea1d0465] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:25:28 | INFO     | [02324bf3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:25:28 | INFO     | [df26f5f6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:25:28 | INFO     | [548a0377] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:29:03 | INFO     | [b5f12bc8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.017s
+2026-04-08 00:29:09 | INFO     | [ca11d3f8] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.010s
+2026-04-08 00:29:11 | INFO     | [0502113e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.009s
+2026-04-08 00:39:23 | INFO     | [45e59070] | app.api.main | Accepted for background processing: 外商投资法.pdf as law
+2026-04-08 00:39:23 | INFO     | [45e59070] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.041s
+2026-04-08 00:39:25 | INFO     | [45e59070] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:39:26 | INFO     | [45edb40b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:39:32 | INFO     | [b23c8550] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:39:42 | INFO     | [cf9d6aec] | app.api.main | Accepted for background processing: 外商投资法司法解释.docx as interpretation
+2026-04-08 00:39:42 | INFO     | [cf9d6aec] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.003s
+2026-04-08 00:39:42 | INFO     | [cf9d6aec] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:39:44 | INFO     | [448ed39f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:39:45 | INFO     | [71007f3e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:43:36 | INFO     | [3e9502aa] | app.rag.retriever | Physical file permanently deleted: temp_uploads\外商投资法司法解释.docx
+2026-04-08 00:43:36 | INFO     | [3e9502aa] | app.api.main | DELETE /api/files/interpretation/外商投资法司法解释 | Status: 200 | Latency: 0.110s
+2026-04-08 00:43:36 | INFO     | [a0457100] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-08 00:44:28 | INFO     | [6c21b976] | app.api.main | Accepted for background processing: 外商投资法司法解释.docx as interpretation
+2026-04-08 00:44:28 | INFO     | [6c21b976] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.003s
+2026-04-08 00:44:28 | INFO     | [6c21b976] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:44:30 | INFO     | [2574fd21] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:44:32 | INFO     | [455d91f6] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.017s
+2026-04-08 00:44:39 | INFO     | [590257d6] | app.rag.retriever | Physical file permanently deleted: temp_uploads\外商投资法司法解释.docx
+2026-04-08 00:44:39 | INFO     | [590257d6] | app.api.main | DELETE /api/files/interpretation/外商投资法司法解释 | Status: 200 | Latency: 0.053s
+2026-04-08 00:44:39 | INFO     | [04c7ec26] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:47:54 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:47:54 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 00:47:55 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:47:55 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 00:48:02 | INFO     | [a5912801] | app.api.main | Accepted for background processing: 外商投资法司法解释.docx as interpretation
+2026-04-08 00:48:02 | INFO     | [a5912801] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.003s
+2026-04-08 00:48:09 | INFO     | [a5912801] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:48:09 | DEBUG    | [a5912801] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 00:48:09 | DEBUG    | [a5912801] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 00:48:10 | DEBUG    | [a5912801] | jieba | Loading model cost 0.643 seconds.
+2026-04-08 00:48:10 | DEBUG    | [a5912801] | jieba | Prefix dict has been built successfully.
+2026-04-08 00:48:10 | INFO     | [5c8f725c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:48:10 | INFO     | [8288d26b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:48:10 | INFO     | [44b6ea16] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:48:35 | INFO     | [99af682b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.087s
+2026-04-08 00:49:52 | INFO     | [4c4be61d] | app.rag.retriever | Physical file permanently deleted: temp_uploads\外商投资法司法解释.docx
+2026-04-08 00:49:52 | INFO     | [4c4be61d] | app.api.main | DELETE /api/files/interpretation/外商投资法司法解释 | Status: 200 | Latency: 0.080s
+2026-04-08 00:49:52 | INFO     | [37b4ee0c] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-08 00:50:05 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:50:05 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 00:50:06 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:50:06 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 00:50:11 | INFO     | [fe1c9a7a] | app.api.main | Accepted for background processing: 外商投资法司法解释.docx as interpretation
+2026-04-08 00:50:11 | INFO     | [fe1c9a7a] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.008s
+2026-04-08 00:50:15 | INFO     | [fe1c9a7a] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 00:50:15 | DEBUG    | [fe1c9a7a] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 00:50:15 | DEBUG    | [fe1c9a7a] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 00:50:16 | DEBUG    | [fe1c9a7a] | jieba | Loading model cost 0.662 seconds.
+2026-04-08 00:50:16 | DEBUG    | [fe1c9a7a] | jieba | Prefix dict has been built successfully.
+2026-04-08 00:50:16 | INFO     | [df8aea7b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:50:16 | INFO     | [909fff58] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:50:18 | INFO     | [7257464e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.056s
+2026-04-08 00:50:28 | INFO     | [8162e1be] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:50:34 | INFO     | [ea4bc5ce] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:50:50 | INFO     | [21651764] | app.api.main | Accepted for background processing: 海南福莱斯林业有限公司、白沙黎族自治县兴林林业开发有限公司中外合资经营企业合同纠纷民事二审民事判决书(FBMCLI.C.554186939).docx as case
+2026-04-08 00:50:50 | INFO     | [21651764] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.006s
+2026-04-08 00:50:52 | INFO     | [21651764] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 00:52:35 | INFO     | [21651764] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 10192 (Prompt: 6096, Completion: 4096) | Latency: 103.817s
+2026-04-08 00:52:35 | ERROR    | [21651764] | app.rag.law_processor | LLM distillation failed (JSON Mode error): Unterminated string starting at: line 147 column 24 (char 9158)
+2026-04-08 00:52:35 | INFO     | [5b38ae98] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 00:52:35 | INFO     | [109aeab0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [df383fb5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [0ccfd775] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [08b82ca2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [22636337] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [1a3914cb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:52:35 | INFO     | [9bfa576b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [5383eeae] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [886e0ef9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [f58ae8e4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [dbfcab7e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [4ea3cba0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:52:35 | INFO     | [5b8d76b4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [675608a9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [dd00ed69] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [693aa225] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [fde712b7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:52:35 | INFO     | [32a79edb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:52:35 | INFO     | [06141818] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.011s
+2026-04-08 00:52:35 | INFO     | [1d775400] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.012s
+2026-04-08 00:52:35 | INFO     | [53335df5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [9a3d21de] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:52:35 | INFO     | [30f8ab44] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [f5097127] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [4a0e4dda] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [4e61fc38] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:52:35 | INFO     | [138d1c68] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [bdf8a0fc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [1c9f69a5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [c9245f7b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [4861d434] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [b372350c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [528ec0ea] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [0c643b99] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [cfcc4fa4] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [33e3f993] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [d07792e0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [3e0ecc9d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [0a22f638] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [fb5d0688] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [774b907f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [d6b14d56] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:52:35 | INFO     | [6ab701fc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 00:52:35 | INFO     | [8ce35c79] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:52:35 | INFO     | [3acc5899] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 00:52:35 | INFO     | [4026b59b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [8dd375b3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:52:35 | INFO     | [5b2919ae] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 00:52:35 | INFO     | [69f8e70a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 00:52:35 | INFO     | [a13d0294] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 00:52:35 | INFO     | [004e4116] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 00:54:47 | INFO     | [71086c67] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.011s
+2026-04-08 00:54:50 | INFO     | [a70c1e1e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.012s
+2026-04-08 00:54:51 | INFO     | [b98b89e1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.014s
+2026-04-08 00:54:52 | INFO     | [8f0a3893] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.013s
+2026-04-08 00:55:07 | INFO     | [7fc3ff43] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.019s
+2026-04-08 00:58:30 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:58:30 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 00:58:31 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 00:58:31 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log

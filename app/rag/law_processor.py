@@ -190,8 +190,8 @@ class LawDataProcessor:
             
             return data if isinstance(data, dict) else {}
         except Exception as e:
-            logger.error(f"LLM distillation failed (JSON Mode error): {e}")
-            return {}
+            logger.error(f"LLM distillation failed (JSON Mode error): {e}", exc_info=True)
+            raise ValueError(f"LLM distillation JSON parsing failed: {e}")
 
     async def process_court_case(self, case_name: str, full_text: str) -> List[ProcessedChunk]:
         """核心 RAG 管线：语义分拨 + 0 重叠物理切片"""
@@ -217,27 +217,64 @@ class LawDataProcessor:
         final_verdict = document_summary.get("final_verdict", "未明确")
         is_plaintiff_win = document_summary.get("is_plaintiff_win", False)
         cited_laws = document_summary.get("cited_laws", [])
+        if not cited_laws:
+            cited_laws = ["未提及"]
         
         summary_info_full = f"案号: {case_id} | 法院: {court_name} | {meta['cause_of_action']}\n全局裁判结果: {final_verdict} (原告胜诉: {is_plaintiff_win})"
         summary_info_partial = f"案号: {case_id} | 法院: {court_name} | {meta['cause_of_action']}"
         
         label_map = {
-            "attack": "[⚠️单方主张参考]", "counter": "[⚠️单方抗辩参考]",
-            "fact": "[客观事实认定]", "reasoning": "[法理裁决说理]", "verdict": "[最终裁判指令]"
+            "attack": "[⚠️单方主张参考]",
+            "counter": "[⚠️单方抗辩参考]",
+            "fact": "[客观事实认定]",
+            "reasoning": "[法理裁决说理]",
+            "final_order": "[最终裁判指令]",
+            "verdict": "[最终裁判指令]",  # backward compatibility
         }
 
         for sec_idx, section in enumerate(segments):
-            logic = section.get("segment_type", "unknown").split(' ')[0]
+            raw_logic = section.get("segment_type", "unknown").split(" ")[0]
+            # Normalize legacy segment type.
+            logic = "final_order" if raw_logic == "verdict" else raw_logic
+            secondary_types = section.get("secondary_types", [])
+            if not isinstance(secondary_types, list):
+                secondary_types = []
+            normalized_secondary = [
+                ("final_order" if str(t) == "verdict" else str(t))
+                for t in secondary_types
+                if str(t).strip()
+            ]
+            if not normalized_secondary:
+                normalized_secondary = ["无"]
+
+            evidence_items = section.get("evidence_items", [])
+            if not isinstance(evidence_items, list) or not evidence_items:
+                evidence_items = ["无"]
+            
+            legal_refs = section.get("legal_refs", [])
+            if not isinstance(legal_refs, list) or not legal_refs:
+                legal_refs = ["无"]
+
             body = section.get("content", "")
             if not body: continue
             
             # 优化：主张、抗辩、裁判结果 均不注入全局结论，避免信息冗余或泄露结果给推理过程
-            if logic in ["attack", "counter", "verdict"]:
+            if logic in ["attack", "counter", "final_order"]:
                 summary_info = summary_info_partial
             else:
                 summary_info = summary_info_full
             
-            header = f"{label_map.get(logic, f'[{logic}]')}\n背景: {summary_info}\n板块要点: {section.get('summary', '')}\n"
+            evidence_hint = json.dumps(evidence_items[:5], ensure_ascii=False)
+            legal_hint = json.dumps(legal_refs[:5], ensure_ascii=False)
+            secondary_hint = json.dumps(normalized_secondary, ensure_ascii=False)
+            header = (
+                f"{label_map.get(logic, f'[{logic}]')}\n"
+                f"背景: {summary_info}\n"
+                f"板块要点: {section.get('summary', '')}\n"
+                f"次标签: {secondary_hint}\n"
+                f"证据项: {evidence_hint}\n"
+                f"法条引用: {legal_hint}\n"
+            )
             sub_points = self._recursive_split(body, max_chars=3000, overlap=0)
             
             for p_idx, sub_text in enumerate(sub_points):
@@ -249,6 +286,7 @@ class LawDataProcessor:
                     "id": f"case_{case_id}_{logic}_s{sec_idx}_p{p_idx}_{chunk_id}",
                     "content": content,
                     "metadata": {
+                        "domain": "foreign_investment",
                         "case_id": case_id, "year": year, "court_name": court_name,
                         "court_level": court_level, "section_type": logic,
                         "logic_type": logic, "case_name": case_name, "tier": tier,
@@ -258,10 +296,20 @@ class LawDataProcessor:
                         "is_plaintiff_win": is_plaintiff_win,
                         "cited_laws": cited_laws if cited_laws else ["未提及"],
                         "summary": section.get("summary", ""),
+                        "secondary_types": normalized_secondary,
+                        "evidence_items": json.dumps(evidence_items, ensure_ascii=False),
+                        "legal_refs": json.dumps(legal_refs, ensure_ascii=False),
                         "part_idx": p_idx,
                         "header_context": header # 存入元数据，仅在召回转换时还原
                     }
                 })
+        
+        # 校验：如果提炼出的有效片段为空，抛出错误，不许降级
+        if not chunks:
+            logger.error(f"Distillation produced 0 segments for {case_name}. Fallback is not allowed.")
+            raise ValueError(f"LLM distillation failed to produce logic segments for: {case_name}")
+        
+        logger.info(f"Processed case {case_name}: generated {len(chunks)} chunks.")
         return chunks
 
     def process_law_article(self, law_name: str, content_text: str, doc_subtype: str = "law") -> List[ProcessedChunk]:
@@ -275,12 +323,25 @@ class LawDataProcessor:
             "related_laws": [],
             "related_articles": []
         }
+        # Ensure references are non-empty for ChromaDB
+        if not refs["related_laws"]:
+            refs["related_laws"] = ["无"]
+        if not refs["related_articles"]:
+            refs["related_articles"] = ["无"]
         chunks = []
-        matches = list(re.finditer(r'第[一二三四五六七八九十百千]+条[ 　、：:]?', content_text))
+        
+        # 预处理：压缩多个换行为一个，并规范化行首
+        clean_text = re.sub(r'\n{2,}', '\n', content_text.strip())
+        processed_text = "\n" + clean_text
+        
+        # 使用 MULTILINE 模式匹配行首的“第xx条”
+        # 排除掉正文中出现的“根据第xx条”这种情况
+        matches = list(re.finditer(r'^\s*(第[一二三四五六七八九十百千\d]+条)[ 　、：:]?', processed_text, re.MULTILINE))
+        
         for i, match in enumerate(matches):
             start = match.start()
-            end = matches[i+1].start() if i + 1 < len(matches) else len(content_text)
-            text = content_text[start:end].strip()
+            end = matches[i+1].start() if i + 1 < len(matches) else len(processed_text)
+            text = processed_text[start:end].strip()
             if not text: continue
             article_num = self._extract_article_number(text)
             content_hash = hashlib.sha256(text.encode('utf-8')).hexdigest()[:8]
@@ -288,6 +349,7 @@ class LawDataProcessor:
                 "id": f"law_{clean_law_name}_{i}_{content_hash}",
                 "content": f"[裁判依据: 《{clean_law_name}》]\n" + text,
                 "metadata": {
+                    "domain": "foreign_investment",
                     "law_name": clean_law_name,
                     "document_name": clean_law_name,
                     "type": "law_article",
@@ -304,6 +366,7 @@ class LawDataProcessor:
                 "id": f"law_{clean_law_name}_0_{content_hash}",
                 "content": f"[裁判依据: 《{clean_law_name}》]\n" + content_text.strip(),
                 "metadata": {
+                    "domain": "foreign_investment",
                     "law_name": clean_law_name,
                     "document_name": clean_law_name,
                     "type": "law_article",

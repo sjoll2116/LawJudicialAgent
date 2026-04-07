@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+﻿import React, { useState, useEffect, useRef, useMemo } from 'react';
 import axios from 'axios';
-import { 
-  MessageSquare, Database, FileText, Send, Trash2, 
-  Upload, ShieldCheck, Plus, History, ChevronRight, RotateCcw, 
-  Pause, Play, Square, RefreshCw
+import {
+  MessageSquare, Database, FileText, Send, Trash2,
+  Upload, ShieldCheck, Plus, History, ChevronRight,
+  RefreshCw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -61,30 +61,24 @@ const App: React.FC = () => {
   // --- Global Navigation ---
   const [view, setView] = useState<'chat' | 'docs' | 'db'>('chat');
   const [dbTab, setDbTab] = useState<UploadDocType>('case');
-  
+
   // --- Session Management ---
   const [sessions, setSessions] = useState<Session[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
-  
+
   // --- Upload Queue & Control ---
   const [uploadQueue, setUploadQueue] = useState<UploadTask[]>([]);
   const [isPaused, setIsPaused] = useState(false);
   const [uploadType, setUploadType] = useState<UploadDocType>('case');
-  const abortControllerRef = useRef<AbortController | null>(null);
   const isPausedRef = useRef(false);
-  
+
   // --- UI States ---
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingChunks, setLoadingChunks] = useState(false);
   const [chunks, setChunks] = useState<{ law_articles: Chunk[], court_cases: Chunk[] }>({ law_articles: [], court_cases: [] });
-  const [globalMetadata, setGlobalMetadata] = useState<{ elements: string[], keywords: string[] }>({ elements: [], keywords: [] });
-  const [showMetaDrawer, setShowMetaDrawer] = useState(false);
   const [expandedCase, setExpandedCase] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
-
-  // --- Selected Management ---
-  const [selectedCaseNames, setSelectedCaseNames] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     isPausedRef.current = isPaused;
@@ -122,7 +116,7 @@ const App: React.FC = () => {
     const newSession: Session = {
       id: Date.now().toString(),
       title: `新案件 ${new Date().toLocaleTimeString()}`,
-      messages: [{ role: 'ai', content: '您好，协助您进行民商事法律实务及模拟质证建议。建议先上传案件材料以提升 RAG 检索精准度。' }],
+      messages: [{ role: 'ai', content: '您好，我是司法智能助手，很高兴能协助您进行民商事法律实务及模拟质证建议。' }],
       state: null,
       lastUpdated: Date.now()
     };
@@ -147,16 +141,12 @@ const App: React.FC = () => {
   const fetchChunks = async () => {
     setLoadingChunks(true);
     try {
-      const [chunksRes, metaRes] = await Promise.all([
-        axios.get(`${API_BASE}/chunks`),
-        axios.get(`${API_BASE}/metadata/registry`)
-      ]);
-      
+      const chunksRes = await axios.get(`${API_BASE}/chunks`);
+
       setChunks({
         law_articles: (chunksRes.data.law_articles || []).filter((c: any) => c && c.metadata),
         court_cases: (chunksRes.data.court_cases || []).filter((c: any) => c && c.metadata)
       });
-      setGlobalMetadata(metaRes.data || { elements: [], keywords: [] });
     } catch (e) {
       console.error('Fetch chunks failed:', e);
     } finally {
@@ -166,16 +156,16 @@ const App: React.FC = () => {
 
   const handleSend = async () => {
     if (!input.trim() || !activeSessionId || loading) return;
-    
+
     const userMsg = input.trim();
     const sessionId = activeSessionId;
-    
+
     setSessions(prev => prev.map(s => s.id === sessionId ? {
       ...s,
       messages: [...s.messages, { role: 'user', content: userMsg }],
       lastUpdated: Date.now()
     } : s));
-    
+
     setInput('');
     setLoading(true);
 
@@ -185,7 +175,7 @@ const App: React.FC = () => {
         message: userMsg,
         state_override: prevState
       });
-      
+
       setSessions(prev => prev.map(s => s.id === sessionId ? {
         ...s,
         messages: res.data.messages,
@@ -328,8 +318,8 @@ const App: React.FC = () => {
                 <button className="new-chat-btn" onClick={createNewSession}><Plus size={18} /> 案情咨询</button>
                 <div className="session-list">
                   {sessions.map(s => (
-                    <div 
-                      key={s.id} 
+                    <div
+                      key={s.id}
                       className={`session-item ${activeSessionId === s.id ? 'active' : ''}`}
                       onClick={() => setActiveSessionId(s.id)}
                     >
@@ -353,11 +343,18 @@ const App: React.FC = () => {
                     <div ref={chatEndRef} />
                   </div>
                   <div className="chat-input-area">
-                    <input 
-                      value={input} 
-                      onChange={e => setInput(e.target.value)} 
-                      onKeyPress={e => e.key === 'Enter' && handleSend()} 
-                      placeholder="描述案情细节，或上传协议发起质证..." 
+                    <textarea
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSend();
+                        }
+                      }}
+                      className="chat-input"
+                      placeholder="描述案情细节，或提供证据线索..."
+                      rows={Math.min(input.split('\n').length, 5)}
                       disabled={loading || !activeSessionId}
                     />
                     <button onClick={handleSend} disabled={loading || !activeSessionId} className="send-btn"><Send size={20} /></button>
@@ -440,7 +437,7 @@ const App: React.FC = () => {
                   <div key={name} className="case-group-panel">
                     <div className="case-header" onClick={() => setExpandedCase(expandedCase === name ? null : name)}>
                       <span className="case-title">{dbTab === 'case' ? '📄' : (dbTab === 'law' ? '📜' : '⚖️')} {name}</span>
-                      <div className="case-meta"><span>{list.length} 切块</span> <button className="delete-file-btn" onClick={(e) => { e.stopPropagation(); handleDeleteFile(dbTab, name); }}><Trash2 size={16}/></button> <ChevronRight size={16} style={{ transition: '0.3s', transform: expandedCase === name ? 'rotate(90deg)' : 'none' }} /></div>
+                      <div className="case-meta"><span>{list.length} 切块</span> <button className="delete-file-btn" onClick={(e) => { e.stopPropagation(); handleDeleteFile(dbTab, name); }}><Trash2 size={16} /></button> <ChevronRight size={16} style={{ transition: '0.3s', transform: expandedCase === name ? 'rotate(90deg)' : 'none' }} /></div>
                     </div>
                     {expandedCase === name && (
                       <div className="chunk-list">
@@ -448,7 +445,7 @@ const App: React.FC = () => {
                           <div key={c.id} className="chunk-item">
                             <div className="chunk-top">
                               <span className="tag-type">{dbTab === 'case' ? (c.metadata?.logic_type || 'case') : (c.metadata?.article_num || '全文段')}</span>
-                              <button onClick={() => handleDeleteChunk(dbTab === 'case' ? 'case' : 'law', c.id)} className="delete-btn"><Trash2 size={16}/></button>
+                              <button onClick={() => handleDeleteChunk(dbTab === 'case' ? 'case' : 'law', c.id)} className="delete-btn"><Trash2 size={16} /></button>
                             </div>
                             <div className="chunk-body" style={{ whiteSpace: 'pre-wrap' }}>{c.content}</div>
                           </div>

@@ -1,4 +1,4 @@
-﻿import os
+import os
 import shutil
 import sys
 import time
@@ -62,13 +62,25 @@ async def chat(request: ChatRequest):
         result = service.chat(request.message, request.state_override)
         msgs = []
         for m in result.get('messages', []):
-            role = 'user' if m.type == 'human' else 'ai'
-            msgs.append({'role': role, 'content': m.content})
+            if hasattr(m, 'type'):
+                role = 'user' if m.type == 'human' else 'ai'
+                content = getattr(m, 'content', '')
+            elif isinstance(m, dict):
+                role_raw = m.get('role') or m.get('type') or 'ai'
+                role = 'user' if role_raw in {'human', 'user'} else 'ai'
+                content = m.get('content', '')
+            else:
+                role = 'ai'
+                content = str(m)
+            msgs.append({'role': role, 'content': content})
+
+        state_payload = dict(result)
+        state_payload['messages'] = msgs
         return {
             'messages': msgs,
             'phase': result.get('phase', 'reception'),
             'intent': result.get('intent', 'unclear'),
-            'state': result,
+            'state': state_payload,
         }
     except Exception as e:
         logger.error(f'Chat error: {e}', exc_info=True)
