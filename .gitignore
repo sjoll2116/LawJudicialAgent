@@ -12,3 +12,4 @@ test_output.txt
 test_output_utf8.txt
 test_result.txt
 *.sqlite3-journal
+*.log
