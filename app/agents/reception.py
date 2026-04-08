@@ -1,5 +1,5 @@
 """
-Reception agent: classify intent, collect slots, and bootstrap state.
+负责识别用户意图、收集关键要素并启动状态机。
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 from app.core.structured_output import call_with_json_retry
 from app.graph.state import CaseState, Claim, EvidenceStatus, IntentType, PartyInfo
 from app.llm import chat_completion
-from app.prompts.templates import RECEPTION_SYSTEM_PROMPT
+from app.prompts.templates import RECEPTION_SYSTEM_PROMPT, SIMPLE_QA_SYSTEM_PROMPT
 from app.rag.retriever import HybridRetriever
 
 logger = logging.getLogger(__name__)
@@ -98,8 +98,11 @@ def reception_node(state: CaseState) -> dict:
     if output is None:
         return {"messages": [AIMessage(content="系统暂时无法生成可用结构化结果，请换种说法后重试。")]}
 
+    intent_str = str(output.intent)
+    is_simple_qa = (intent_str == IntentType.SIMPLE_QA.value)
+
     updates: dict = {
-        "messages": [AIMessage(content=output.reply_to_user or "已收到。请继续补充事实与证据。")],
+        "messages": [AIMessage(content=output.reply_to_user or "已收到。请继续补充事实与证据。")] if not is_simple_qa else [],
         "rag_context": rag_context,
     }
 
@@ -187,7 +190,7 @@ def simple_qa_node(state: CaseState) -> dict:
     context = retriever.format_context_for_prompt({"law_articles": results, "court_cases": []})
 
     messages = [
-        {"role": "system", "content": f"你是专业法律顾问。请基于以下资料回答用户问题。\n\n{context}"},
+        {"role": "system", "content": SIMPLE_QA_SYSTEM_PROMPT.format(context=context)},
         {"role": "user", "content": query},
     ]
     answer = chat_completion(messages, temperature=0.2)

@@ -1,5 +1,5 @@
 """
-LangGraph workflow definition.
+智能体工作流定义
 """
 
 from __future__ import annotations

@@ -2,7 +2,7 @@ from app.rag.law_processor import LawDataProcessor
 import os
 
 processor = LawDataProcessor()
-# Use a shorter file for faster check if needed, or just DCM
+# 使用较短的文件以加快检查速度，或者直接使用 DCM
 file_path = r"e:\Law-judge\temp_uploads\DCM贸易公司、四川瑞巨物联网科技有限公司等股权转让纠纷二审民事判决书(FBMCLI.C.317442702).txt"
 with open(file_path, "r", encoding="utf-8") as f:
     text = f.read()

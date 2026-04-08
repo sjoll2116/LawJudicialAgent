@@ -1,5 +1,5 @@
 """
-Trial stage nodes: plaintiff, defendant, judge, and document writer.
+庭审阶段节点：原告、被告、法官及文书撰写。
 """
 
 from __future__ import annotations

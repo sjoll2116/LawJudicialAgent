@@ -1876,3 +1876,282 @@ ValueError: LLM distillation JSON parsing failed: Expecting property name enclos
 2026-04-08 01:04:17 | INFO     | [8e82f22e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
 2026-04-08 01:04:17 | INFO     | [35520931] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
 2026-04-08 01:04:18 | INFO     | [3d12f062] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.014s
+2026-04-08 12:25:16 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 12:25:16 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 12:25:17 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 12:25:17 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 12:26:21 | INFO     | [149397d1] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.175s
+2026-04-08 12:26:21 | INFO     | [7f02fa82] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.017s
+2026-04-08 12:29:15 | INFO     | [70c2f74b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.016s
+2026-04-08 12:29:22 | INFO     | [9b9a6a7f] | app.api.main | Accepted for background processing: 黄启燮、缔一国际跨境贸易有限公司股权转让纠纷民事一审民事判决书(FBMCLI.C.503102421).docx as case
+2026-04-08 12:29:22 | INFO     | [9b9a6a7f] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.008s
+2026-04-08 12:29:27 | INFO     | [9b9a6a7f] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 12:30:47 | INFO     | [9b9a6a7f] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 7197 (Prompt: 3201, Completion: 3996) | Latency: 80.810s
+2026-04-08 12:30:47 | INFO     | [9b9a6a7f] | app.rag.law_processor | Processed case 黄启燮、缔一国际跨境贸易有限公司股权转让纠纷民事一审民事判决书(FBMCLI.C.503102421): generated 5 chunks.
+2026-04-08 12:30:48 | INFO     | [9b9a6a7f] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 12:30:48 | DEBUG    | [9b9a6a7f] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 12:30:48 | DEBUG    | [9b9a6a7f] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 12:30:48 | DEBUG    | [9b9a6a7f] | jieba | Loading model cost 0.576 seconds.
+2026-04-08 12:30:48 | DEBUG    | [9b9a6a7f] | jieba | Prefix dict has been built successfully.
+2026-04-08 12:30:49 | INFO     | [af20917c] | app.api.main | Accepted for background processing: 吴良好与如皋市金鼎置业有限公司等股东资格确认纠纷案(FBMCLI.C.534019156).docx as case
+2026-04-08 12:30:49 | INFO     | [cefba71f] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.015s
+2026-04-08 12:30:49 | INFO     | [9fe7fb4c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 12:30:49 | INFO     | [af20917c] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.020s
+2026-04-08 12:30:49 | INFO     | [6fe0b9f9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.008s
+2026-04-08 12:30:49 | INFO     | [b18d2368] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.006s
+2026-04-08 12:30:50 | INFO     | [af20917c] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 12:31:34 | INFO     | [af20917c] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 5097 (Prompt: 2990, Completion: 2107) | Latency: 44.663s
+2026-04-08 12:31:34 | INFO     | [af20917c] | app.rag.law_processor | Processed case 吴良好与如皋市金鼎置业有限公司等股东资格确认纠纷案(FBMCLI.C.534019156): generated 5 chunks.
+2026-04-08 12:31:35 | INFO     | [af20917c] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 12:31:35 | INFO     | [6058f12b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 46.468s
+2026-04-08 12:31:35 | INFO     | [0338998a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [e809d354] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [5a4d4232] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [a4e3e1eb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [656ab6d8] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:31:35 | INFO     | [8f6cc6c9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [f2800783] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [3ed08def] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:31:35 | INFO     | [d6277d36] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [4e663e7d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [f9c2493c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [eb6d6a30] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [7765b179] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [516868f3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [e3be5aa6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [20aa63e6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [149a0c6c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [0ad60748] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [cea2ab41] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:31:35 | INFO     | [e17eaf0c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [e6ba4a81] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [cb748f46] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [61d70b13] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:35 | INFO     | [16534ee2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:31:35 | INFO     | [98437d66] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [4f16b9f0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [fe5a9236] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [064f98f3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [a4962d03] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:31:35 | INFO     | [73cc2ea2] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:31:35 | INFO     | [a42023e2] | app.api.main | Accepted for background processing: 郑州俱进热电能源有限公司、丰润香港国际发展投资有限公司债权人代位权纠纷再审审查与审判监督民事裁定书(FBMCLI.C.316097312).docx as case
+2026-04-08 12:31:35 | INFO     | [a42023e2] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.006s
+2026-04-08 12:31:35 | INFO     | [f3445d4e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:31:36 | INFO     | [a42023e2] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 12:32:56 | INFO     | [a42023e2] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 7216 (Prompt: 3268, Completion: 3948) | Latency: 79.905s
+2026-04-08 12:32:56 | INFO     | [a42023e2] | app.rag.law_processor | Processed case 郑州俱进热电能源有限公司、丰润香港国际发展投资有限公司债权人代位权纠纷再审审查与审判监督民事裁定书(FBMCLI.C.316097312): generated 4 chunks.
+2026-04-08 12:32:56 | INFO     | [a42023e2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 12:32:56 | INFO     | [34804432] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 81.131s
+2026-04-08 12:32:56 | INFO     | [5610842c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 81.132s
+2026-04-08 12:32:56 | INFO     | [51e44b75] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 81.133s
+2026-04-08 12:32:56 | INFO     | [83e21a81] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:32:56 | INFO     | [1a1ad003] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:32:56 | INFO     | [078ba14f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:32:56 | INFO     | [ba8c45f6] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:32:56 | INFO     | [da064d94] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:32:56 | INFO     | [7de123f7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:32:56 | INFO     | [ae4e2df3] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:32:56 | INFO     | [049aee8a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:32:56 | INFO     | [8994dd2e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:32:56 | INFO     | [62892c52] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 12:32:56 | INFO     | [1351141d] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 12:32:56 | INFO     | [43782371] | app.api.main | Accepted for background processing: 佛山市三水德祥物业管理有限公司与刘翠华、佛山市三水德保房地产发展有限公司公司决议撤销纠纷一案民事一审裁定书(FBMCLI.C.312323961).docx as case
+2026-04-08 12:32:56 | INFO     | [d20ce1cc] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:32:56 | INFO     | [43782371] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.004s
+2026-04-08 12:32:57 | INFO     | [43782371] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 12:34:12 | INFO     | [43782371] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 7301 (Prompt: 3627, Completion: 3674) | Latency: 74.940s
+2026-04-08 12:34:12 | INFO     | [43782371] | app.rag.law_processor | Processed case 佛山市三水德祥物业管理有限公司与刘翠华、佛山市三水德保房地产发展有限公司公司决议撤销纠纷一案民事一审裁定书(FBMCLI.C.312323961): generated 5 chunks.
+2026-04-08 12:34:12 | INFO     | [43782371] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 12:34:12 | INFO     | [5de48c80] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 76.094s
+2026-04-08 12:34:12 | INFO     | [985a5e1e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 76.094s
+2026-04-08 12:34:12 | INFO     | [3656d8d5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 76.094s
+2026-04-08 12:34:12 | INFO     | [7efe3bc7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 76.095s
+2026-04-08 12:34:12 | INFO     | [59aae7bb] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 12:34:12 | INFO     | [d63d4507] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:34:12 | INFO     | [9a737bba] | app.api.main | Accepted for background processing: 杨耀丽、广东珠钢投资管理有限公司等房屋买卖合同纠纷民事一审民事判决书(FBMCLI.C.409670719).docx as case
+2026-04-08 12:34:12 | INFO     | [4d7fc38b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:34:12 | INFO     | [9a737bba] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.005s
+2026-04-08 12:34:12 | INFO     | [3d22326c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:34:13 | INFO     | [9a737bba] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 12:35:19 | INFO     | [9a737bba] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 6895 (Prompt: 3692, Completion: 3203) | Latency: 66.194s
+2026-04-08 12:35:19 | INFO     | [9a737bba] | app.rag.law_processor | Processed case 杨耀丽、广东珠钢投资管理有限公司等房屋买卖合同纠纷民事一审民事判决书(FBMCLI.C.409670719): generated 5 chunks.
+2026-04-08 12:35:19 | INFO     | [9a737bba] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 12:35:20 | INFO     | [8a5fa784] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 67.484s
+2026-04-08 12:35:20 | INFO     | [518b07d5] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 67.485s
+2026-04-08 12:35:20 | INFO     | [35f9f7cd] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:35:20 | INFO     | [4a701092] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:35:20 | INFO     | [3fe68ad0] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:35:20 | INFO     | [98dff787] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.005s
+2026-04-08 12:35:20 | INFO     | [27bd8b67] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:35:20 | INFO     | [01f66781] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 12:35:20 | INFO     | [082c8f9e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.004s
+2026-04-08 12:35:20 | INFO     | [d1b98261] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:35:20 | INFO     | [a3ee7ff7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.002s
+2026-04-08 12:35:20 | INFO     | [2c3e1cd7] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.003s
+2026-04-08 13:27:27 | INFO     | [fad11935] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.084s
+2026-04-08 13:27:51 | INFO     | [892227bd] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.032s
+2026-04-08 13:46:38 | INFO     | [76df75ca] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 13:46:38 | INFO     | [76df75ca] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 13:46:39 | INFO     | [76df75ca] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 13:46:52 | INFO     | [76df75ca] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1121 (Prompt: 606, Completion: 515) | Latency: 12.734s
+2026-04-08 13:46:52 | INFO     | [76df75ca] | app.api.main | POST /api/chat | Status: 200 | Latency: 15.211s
+2026-04-08 13:47:27 | INFO     | [bb5a310b] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.054s
+2026-04-08 13:48:57 | INFO     | [83416afc] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.030s
+2026-04-08 13:49:04 | INFO     | [476868b8] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 13:49:05 | INFO     | [476868b8] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 13:49:06 | INFO     | [476868b8] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 13:49:15 | INFO     | [476868b8] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 890 (Prompt: 522, Completion: 368) | Latency: 9.495s
+2026-04-08 13:49:15 | INFO     | [476868b8] | app.api.main | POST /api/chat | Status: 200 | Latency: 10.942s
+2026-04-08 14:50:27 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 14:50:27 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 14:50:28 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 14:50:28 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 14:50:40 | INFO     | [786057d4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.181s
+2026-04-08 14:50:40 | INFO     | [98ebf9f4] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.021s
+2026-04-08 14:50:44 | INFO     | [d3a39fe6] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 14:50:44 | DEBUG    | [d3a39fe6] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 14:50:44 | DEBUG    | [d3a39fe6] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 14:50:44 | DEBUG    | [d3a39fe6] | jieba | Loading model cost 0.733 seconds.
+2026-04-08 14:50:44 | DEBUG    | [d3a39fe6] | jieba | Prefix dict has been built successfully.
+2026-04-08 14:50:44 | INFO     | [d3a39fe6] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 14:50:46 | INFO     | [d3a39fe6] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 14:50:59 | INFO     | [d3a39fe6] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1127 (Prompt: 637, Completion: 490) | Latency: 13.773s
+2026-04-08 14:50:59 | INFO     | [d3a39fe6] | app.api.main | POST /api/chat | Status: 200 | Latency: 17.232s
+2026-04-08 16:17:50 | INFO     | [1d3a4fa5] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:17:51 | INFO     | [1d3a4fa5] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:17:52 | INFO     | [1d3a4fa5] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:18:00 | INFO     | [1d3a4fa5] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 966 (Prompt: 637, Completion: 329) | Latency: 8.199s
+2026-04-08 16:18:00 | INFO     | [1d3a4fa5] | app.api.main | POST /api/chat | Status: 200 | Latency: 10.971s
+2026-04-08 16:18:11 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 16:18:11 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 16:18:13 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 16:18:13 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 16:18:28 | INFO     | [0a2cc3e8] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:18:28 | DEBUG    | [0a2cc3e8] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 16:18:28 | DEBUG    | [0a2cc3e8] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 16:18:29 | DEBUG    | [0a2cc3e8] | jieba | Loading model cost 0.680 seconds.
+2026-04-08 16:18:29 | DEBUG    | [0a2cc3e8] | jieba | Prefix dict has been built successfully.
+2026-04-08 16:18:29 | INFO     | [0a2cc3e8] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:18:30 | INFO     | [0a2cc3e8] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:18:46 | INFO     | [0a2cc3e8] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1376 (Prompt: 742, Completion: 634) | Latency: 15.698s
+2026-04-08 16:18:46 | INFO     | [0a2cc3e8] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:18:47 | INFO     | [0a2cc3e8] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:19:02 | INFO     | [0a2cc3e8] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: False | Tokens: 1165 (Prompt: 600, Completion: 565) | Latency: 14.663s
+2026-04-08 16:19:02 | INFO     | [0a2cc3e8] | app.api.main | POST /api/chat | Status: 200 | Latency: 35.029s
+2026-04-08 16:22:03 | INFO     | [8314c3bb] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:22:03 | INFO     | [8314c3bb] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:22:04 | INFO     | [8314c3bb] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:22:18 | INFO     | [8314c3bb] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1361 (Prompt: 779, Completion: 582) | Latency: 14.007s
+2026-04-08 16:22:18 | INFO     | [8314c3bb] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:22:19 | INFO     | [8314c3bb] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:22:29 | INFO     | [8314c3bb] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: False | Tokens: 1080 (Prompt: 715, Completion: 365) | Latency: 10.079s
+2026-04-08 16:22:29 | INFO     | [8314c3bb] | app.api.main | POST /api/chat | Status: 200 | Latency: 26.437s
+2026-04-08 16:30:05 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 16:30:05 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 16:30:06 | INFO     | [SYSTEM] | root | Logging initialized. Project Root: E:\Law-judge
+2026-04-08 16:30:06 | INFO     | [SYSTEM] | root | Persistent log file: E:\Law-judge\logs\app.log
+2026-04-08 16:30:11 | INFO     | [bcb641ba] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:30:11 | DEBUG    | [bcb641ba] | jieba | Building prefix dict from the default dictionary ...
+2026-04-08 16:30:11 | DEBUG    | [bcb641ba] | jieba | Loading model from cache C:\Users\62774\AppData\Local\Temp\jieba.cache
+2026-04-08 16:30:11 | DEBUG    | [bcb641ba] | jieba | Loading model cost 0.681 seconds.
+2026-04-08 16:30:11 | DEBUG    | [bcb641ba] | jieba | Prefix dict has been built successfully.
+2026-04-08 16:30:11 | INFO     | [bcb641ba] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:30:13 | INFO     | [bcb641ba] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:30:28 | INFO     | [bcb641ba] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1434 (Prompt: 815, Completion: 619) | Latency: 15.036s
+2026-04-08 16:30:28 | INFO     | [bcb641ba] | app.api.main | POST /api/chat | Status: 200 | Latency: 18.067s
+2026-04-08 16:39:30 | INFO     | [e9a38dd2] | app.api.main | Accepted for background processing: 民事诉讼法.docx as law
+2026-04-08 16:39:30 | INFO     | [e9a38dd2] | app.api.main | POST /api/upload | Status: 200 | Latency: 0.057s
+2026-04-08 16:39:38 | INFO     | [e9a38dd2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 413 Request Entity Too Large"
+2026-04-08 16:39:38 | WARNING  | [e9a38dd2] | app.rag.embedding | Embedding API 调用失败: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None}。将在 1s 后进行第 2 次重试...
+2026-04-08 16:39:39 | INFO     | [e9a38dd2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 413 Request Entity Too Large"
+2026-04-08 16:39:39 | WARNING  | [e9a38dd2] | app.rag.embedding | Embedding API 调用失败: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None}。将在 2s 后进行第 3 次重试...
+2026-04-08 16:39:41 | INFO     | [e9a38dd2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 413 Request Entity Too Large"
+2026-04-08 16:39:41 | WARNING  | [e9a38dd2] | app.rag.embedding | Embedding API 调用失败: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None}。将在 4s 后进行第 4 次重试...
+2026-04-08 16:39:45 | INFO     | [e9a38dd2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 413 Request Entity Too Large"
+2026-04-08 16:39:45 | WARNING  | [e9a38dd2] | app.rag.embedding | Embedding API 调用失败: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None}。将在 8s 后进行第 5 次重试...
+2026-04-08 16:39:53 | INFO     | [e9a38dd2] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 413 Request Entity Too Large"
+2026-04-08 16:39:53 | ERROR    | [e9a38dd2] | app.rag.embedding | Embedding API 在 5 次重试后仍然失败。
+2026-04-08 16:39:53 | ERROR    | [e9a38dd2] | app.api.services | Ingestion error for 民事诉讼法.docx: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None} in upsert.
+Traceback (most recent call last):
+  File "E:\Law-judge\app\api\services.py", line 219, in ingest_file
+    self.retriever.ingest_law_articles(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        ids=[c["id"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        documents=[c["content"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        metadatas=[c["metadata"] for c in chunks],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Law-judge\app\rag\retriever.py", line 463, in ingest_law_articles
+    self._law_vect.upsert(ids=ids, documents=documents, metadatas=metadatas)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+        ids=ids,
+    ...<4 lines>...
+        uris=uris,
+    )
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 448, in _validate_and_prepare_upsert_request
+    upsert_embeddings = self._embed_record_set(record_set=upsert_records)
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 736, in _embed_record_set
+    return self._embed(
+           ~~~~~~~~~~~^
+        input=record_set[field],  # type: ignore[literal-required]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        is_query=is_query,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 753, in _embed
+    return self._embedding_function(input=input)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\chromadb\api\types.py", line 860, in __call__
+    result = call(self, input)
+  File "E:\Law-judge\app\rag\embedding.py", line 59, in __call__
+    raise e
+  File "E:\Law-judge\app\rag\embedding.py", line 47, in __call__
+    response = self._client.embeddings.create(
+        model=self._model_name,
+        input=input,
+    )
+  File "C:\Python313\Lib\site-packages\openai\resources\embeddings.py", line 136, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/embeddings",
+        ^^^^^^^^^^^^^^
+    ...<8 lines>...
+        cast_to=CreateEmbeddingResponse,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Python313\Lib\site-packages\openai\_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\site-packages\openai\_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.APIStatusError: Error code: 413 - {'code': 20042, 'message': 'input batch size 112 > maximum allowed batch size 64', 'data': None} in upsert.
+2026-04-08 16:39:53 | INFO     | [301eb90f] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [a41640a9] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [ecfbd802] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 16:39:53 | INFO     | [55e5ba17] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 16:39:53 | INFO     | [e49ef39e] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 16:39:53 | INFO     | [26084f5b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [8f41039c] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [2c960d55] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [b412a29b] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 16:39:53 | INFO     | [ef728c7a] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.001s
+2026-04-08 16:39:53 | INFO     | [ed419342] | app.api.main | GET /api/ingestion/tasks | Status: 200 | Latency: 0.000s
+2026-04-08 16:39:55 | INFO     | [018fafc0] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.155s
+2026-04-08 16:43:14 | INFO     | [9f3b7f4e] | app.api.main | GET /api/chunks | Status: 200 | Latency: 0.032s
+2026-04-08 16:43:32 | INFO     | [a491ac54] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:43:32 | INFO     | [a491ac54] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:43:33 | INFO     | [a491ac54] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:43:49 | INFO     | [a491ac54] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: True | Tokens: 1207 (Prompt: 687, Completion: 520) | Latency: 15.475s
+2026-04-08 16:43:49 | INFO     | [a491ac54] | httpx | HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+2026-04-08 16:43:51 | INFO     | [a491ac54] | httpx | HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-04-08 16:44:02 | INFO     | [a491ac54] | app.llm | LLM Call Success | Model: deepseek-chat | JSON_Mode: False | Tokens: 1062 (Prompt: 700, Completion: 362) | Latency: 12.507s
+2026-04-08 16:44:02 | INFO     | [a491ac54] | app.api.main | POST /api/chat | Status: 200 | Latency: 31.018s

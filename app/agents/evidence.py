@@ -1,5 +1,5 @@
 """
-Evidence stage nodes: cross-exam, dual-check, final call, snapshot lock.
+证据阶段节点：交叉询问、双重检查、最终调用、快照锁定。  
 """
 
 from __future__ import annotations

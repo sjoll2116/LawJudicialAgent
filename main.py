@@ -1,6 +1,5 @@
 """
-CLI entrypoint for local debugging.
-Uses the same chat orchestration as API service to avoid flow divergence.
+项目入口文件：负责启动 FastAPI 服务。
 """
 
 import logging

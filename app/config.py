@@ -1,4 +1,4 @@
-﻿"""Application configuration models and environment loading."""
+"""应用配置模型及环境加载。"""
 
 from __future__ import annotations
 

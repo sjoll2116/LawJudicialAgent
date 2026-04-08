@@ -1,3 +1,6 @@
+"""
+FastAPI 路由模块：定义所有的 API 接口端点。
+"""
 import os
 import shutil
 import sys

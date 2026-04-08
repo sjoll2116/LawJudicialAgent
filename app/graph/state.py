@@ -1,4 +1,4 @@
-"""Shared workflow state models for the legal agent graph."""
+""" 智能体工作流状态模型"""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 
 class IntentType(str, Enum):
-    """User intent classification."""
+    """用户意图分类"""
 
     SIMPLE_QA = "simple_qa"
     COMPLEX_CASE = "complex_case"
@@ -18,7 +18,7 @@ class IntentType(str, Enum):
 
 
 class EvidenceStatus(str, Enum):
-    """Evidence confidence for a claim."""
+    """证据状态"""
 
     PROVEN = "proven"
     UNPROVEN = "unproven"
@@ -26,7 +26,7 @@ class EvidenceStatus(str, Enum):
 
 
 class Claim(BaseModel):
-    """A legal claim in the evidence stage."""
+    """证据阶段的法律主张"""
 
     claim_id: str
     description: str
@@ -36,7 +36,7 @@ class Claim(BaseModel):
 
 
 class PartyInfo(BaseModel):
-    """Party profile."""
+    """当事人信息"""
 
     name: str = "未知"
     type: str = "自然人"
@@ -46,7 +46,7 @@ class PartyInfo(BaseModel):
 
 
 class Citation(BaseModel):
-    """Traceable source citation used by judge/document nodes."""
+    """可追溯的来源引用，由法官/文档节点使用"""
 
     source_id: str
     source_type: str  # law_article | court_case
@@ -58,7 +58,7 @@ class Citation(BaseModel):
 
 
 class CaseState(BaseModel):
-    """End-to-end case state across all graph stages."""
+    """跨越所有图阶段的端到端案件状态"""
 
     messages: Annotated[list, add_messages] = Field(default_factory=list)
 

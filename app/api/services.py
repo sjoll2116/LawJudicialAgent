@@ -2,6 +2,9 @@ import json
 import os
 import sys
 from pathlib import Path
+"""
+后端业务逻辑层，负责协调 RAG 检索、Agent 编排与数据库操作。
+"""
 from typing import Any, Dict, List
 
 # Ensure app is in path

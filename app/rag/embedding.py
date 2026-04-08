@@ -1,6 +1,6 @@
 """
-ChromaDB Embedding Function 
-
+向量嵌入函数模块
+基于 SiliconFlow 的 BGE-M3 模型实现文本向量生成，并提供重试机制。
 """
 
 from __future__ import annotations

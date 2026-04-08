@@ -12,6 +12,8 @@ from app.llm import chat_completion
 from app.prompts.templates import CASE_DISTILL_PROMPT
 
 from app.core.logger import get_logger
+from app.db.knowledge_graph import KnowledgeGraphManager
+
 logger = get_logger(__name__)
 
 class MetadataRegistry:
@@ -59,8 +61,9 @@ class ProcessedChunk(TypedDict):
 class LawDataProcessor:
     """法律知识库处理器 - 采用 LLM 语义分拨架构"""
 
-    def __init__(self, registry: MetadataRegistry = None):
+    def __init__(self, registry: MetadataRegistry = None, kg: KnowledgeGraphManager = None):
         self.registry = registry or MetadataRegistry()
+        self.kg = kg or KnowledgeGraphManager()
 
     @staticmethod
     def _truncate_footers(text: str) -> str:
@@ -313,29 +316,37 @@ class LawDataProcessor:
         return chunks
 
     def process_law_article(self, law_name: str, content_text: str, doc_subtype: str = "law") -> List[ProcessedChunk]:
-        """解析法条信息（保持原有逻辑）"""
+        """解析法条信息并持久化结构化关系"""
         clean_law_name = re.sub(r'\.\w+$', '', law_name).strip()
         normalized_subtype = "interpretation" if doc_subtype == "interpretation" else "law"
         authority_level = 2 if normalized_subtype == "interpretation" else (
             1 if "法" in clean_law_name and "中华人民共和国" in clean_law_name else 3
         )
+        
+        # 1. 注册文档实体
+        doc_id = hashlib.sha256(clean_law_name.encode('utf-8')).hexdigest()[:12]
+        self.kg.add_document(
+            doc_id=doc_id, 
+            title=clean_law_name, 
+            doc_type=normalized_subtype.upper(),
+            authority_level=authority_level
+        )
+
         refs = self._extract_references(content_text) if normalized_subtype == "interpretation" else {
             "related_laws": [],
             "related_articles": []
         }
-        # Ensure references are non-empty for ChromaDB
-        if not refs["related_laws"]:
-            refs["related_laws"] = ["无"]
-        if not refs["related_articles"]:
-            refs["related_articles"] = ["无"]
-        chunks = []
         
-        # 预处理：压缩多个换行为一个，并规范化行首
+        # 建立文档级关系：如果是司法解释，尝试关联到母法
+        if normalized_subtype == "interpretation":
+            for related_law in refs["related_laws"]:
+                target_doc = self.kg.get_document_by_title(related_law)
+                if target_doc:
+                    self.kg.add_relation(doc_id, target_doc['id'], "EXPLAINS_DOCUMENT", confidence=0.9)
+
+        chunks = []
         clean_text = re.sub(r'\n{2,}', '\n', content_text.strip())
         processed_text = "\n" + clean_text
-        
-        # 使用 MULTILINE 模式匹配行首的“第xx条”
-        # 排除掉正文中出现的“根据第xx条”这种情况
         matches = list(re.finditer(r'^\s*(第[一二三四五六七八九十百千\d]+条)[ 　、：:]?', processed_text, re.MULTILINE))
         
         for i, match in enumerate(matches):
@@ -344,9 +355,27 @@ class LawDataProcessor:
             text = processed_text[start:end].strip()
             if not text: continue
             article_num = self._extract_article_number(text)
+            
+            # 2. 注册条文实体
+            prov_id = f"{clean_law_name}_{article_num or i}"
+            self.kg.add_provision(prov_id, doc_id, article_num, text)
+
+            # 3. 建立条文级关系：如果司法解释条文引用了母法条文
+            if normalized_subtype == "interpretation":
+                # 寻找类似“外商投资法第四条”的引用
+                for ref_article in refs["related_articles"]:
+                    # 解析引用中的法律名和条文号
+                    ref_match = re.search(r"《([^》]+)》第([一二三四五六七八九十百千\d]+条)", ref_article)
+                    if ref_match:
+                        ref_law, ref_num = ref_match.groups()
+                        target_prov_id = f"{ref_law}_{ref_num}"
+                        # 只有当引用的内容包含当前条文内容或者是其标题时，认为是“解释关系”
+                        if ref_num in text[:100] or "适用" in text[:50]:
+                            self.kg.add_relation(prov_id, target_prov_id, "EXPLAINS_PROVISION", confidence=0.85)
+
             content_hash = hashlib.sha256(text.encode('utf-8')).hexdigest()[:8]
             chunks.append({
-                "id": f"law_{clean_law_name}_{i}_{content_hash}",
+                "id": f"law_{doc_id}_{i}_{content_hash}",
                 "content": f"[裁判依据: 《{clean_law_name}》]\n" + text,
                 "metadata": {
                     "domain": "foreign_investment",
@@ -356,14 +385,16 @@ class LawDataProcessor:
                     "doc_subtype": normalized_subtype,
                     "authority_level": authority_level,
                     "article_num": article_num,
-                    "related_laws": refs["related_laws"],
-                    "related_articles": refs["related_articles"]
+                    "provision_id": prov_id, # 非常重要：用于后续一跳关联
+                    "related_laws": refs["related_laws"] if refs["related_laws"] else ["无"],
+                    "related_articles": refs["related_articles"] if refs["related_articles"] else ["无"]
                 }
             })
+            
         if not chunks and content_text.strip():
             content_hash = hashlib.sha256(content_text.encode('utf-8')).hexdigest()[:8]
             chunks.append({
-                "id": f"law_{clean_law_name}_0_{content_hash}",
+                "id": f"law_{doc_id}_0_{content_hash}",
                 "content": f"[裁判依据: 《{clean_law_name}》]\n" + content_text.strip(),
                 "metadata": {
                     "domain": "foreign_investment",
@@ -373,8 +404,9 @@ class LawDataProcessor:
                     "doc_subtype": normalized_subtype,
                     "authority_level": authority_level,
                     "article_num": "",
-                    "related_laws": refs["related_laws"],
-                    "related_articles": refs["related_articles"]
+                    "provision_id": f"{clean_law_name}_full",
+                    "related_laws": refs["related_laws"] if refs["related_laws"] else ["无"],
+                    "related_articles": refs["related_articles"] if refs["related_articles"] else ["无"]
                 }
             })
         return chunks

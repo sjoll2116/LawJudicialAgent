@@ -17,6 +17,7 @@ from whoosh.query import And, Or, Term
 from app.config import settings
 from app.core.logger import get_logger
 from app.rag.embedding import SiliconFlowEmbeddingFunction
+from app.db.knowledge_graph import KnowledgeGraphManager
 
 logger = get_logger(__name__)
 
@@ -45,6 +46,7 @@ class HybridRetriever:
         if hasattr(self, "_initialized"):
             return
         self._initialized = True
+        self.kg = KnowledgeGraphManager()
 
         self._embedding_fn = SiliconFlowEmbeddingFunction()
         self._chroma_client = chromadb.PersistentClient(path=settings.seekdb.path)
@@ -272,7 +274,7 @@ class HybridRetriever:
         if not logic_types:
             return {}
 
-        # preserve order while dedup
+        # 去重
         deduped = list(dict.fromkeys(logic_types))
         return {"logic_type": deduped}
 
@@ -309,24 +311,50 @@ class HybridRetriever:
         }
 
     def format_context_for_prompt(self, res: dict) -> str:
-        prompt = "### 法律依据\n"
-        if res.get("law_articles"):
-            prompt += "\n#### 1. 法条\n"
-            for item in res["law_articles"]:
+        prompt = "### 法律依据库 (Structured Legal Registry)\n"
+        
+        # 结果分类
+        direct_laws = []
+        related_interpretations = []
+        
+        for item in res.get("law_articles", []):
+            is_related = item.metadata.get("is_related", False)
+            if item.metadata.get("doc_subtype") == "interpretation" or is_related:
+                related_interpretations.append(item)
+            else:
+                direct_laws.append(item)
+
+        if direct_laws:
+            prompt += "\n#### 【第一层：直接法律依据 (Direct Authorities)】\n"
+            prompt += "> 此类为法律原条文，具有最高适用位阶。\n"
+            for item in direct_laws:
                 source_id = item.doc_id
                 prompt += (
-                    f"- [source_id={source_id}] 《{item.metadata.get('law_name', '未知法条')}》 "
-                    f"{item.content}\n"
+                    f"- [ID={source_id}] 《{item.metadata.get('law_name', '未知法条')}》第{item.metadata.get('article_num', '-')}条\n"
+                    f"  内容: {item.content.replace('[裁判依据: ', '').split(']')[-1].strip()}\n"
+                )
+
+        if related_interpretations:
+            prompt += "\n#### 【第二层：关联司法解释/细则 (Related Interpretations)】\n"
+            prompt += "> 此类是对上述法律条文的具体适用说明，具有极高裁判参考价值。\n"
+            for item in related_interpretations:
+                source_id = item.doc_id
+                is_related = item.metadata.get("is_related", False)
+                rel_hint = " [系统关联匹配]" if is_related else ""
+                prompt += (
+                    f"- [ID={source_id}]{rel_hint} 《{item.metadata.get('law_name', '未知解释')}》\n"
+                    f"  内容: {item.content.replace('[裁判依据: ', '').split(']')[-1].strip()}\n"
                 )
 
         if res.get("court_cases"):
-            prompt += "\n#### 2. 参考判例\n"
+            prompt += "\n#### 【第三层：相关裁判案例参考 (Judicial Precedents)】\n"
+            prompt += "> 仅用于理解事实认定逻辑，不建议直接作为法律依据引用。\n"
             for item in res["court_cases"]:
                 header = item.metadata.get("header_context", "")
                 full_content = f"{header}{item.content}" if header else item.content
                 source_id = item.doc_id
                 prompt += (
-                    f"**[source_id={source_id}] [{item.metadata.get('case_name', '未知案例')}]** "
+                    f"**[ID={source_id}] [{item.metadata.get('case_name', '未知案例')}]** "
                     f"({item.metadata.get('case_id', '-')})\n{full_content}\n\n---\n"
                 )
 
@@ -379,7 +407,35 @@ class HybridRetriever:
         f_res = self._fts_search("law_articles", q, where, n)
 
         alpha = float(max(0.0, min(1.0, settings.system.law_weight_alpha)))
-        return self._rrf_combine(v_res, f_res, w_v=alpha, w_f=1.0 - alpha)
+        initial_hits = self._rrf_combine(v_res, f_res, w_v=alpha, w_f=1.0 - alpha)
+        
+        # --- 关系扩展 (Knowledge Graph Extension) ---
+        expanded_hits = list(initial_hits)
+        seen_ids = {h.doc_id for h in initial_hits}
+        
+        for hit in initial_hits:
+            prov_id = hit.metadata.get("provision_id")
+            if prov_id:
+                related = self.kg.get_related_provisions(prov_id)
+                for rel in related:
+                    # 尝试从向量库或重新构建一个 RetrievalResult
+                    # 这里简化为：如果它已经在 initial_hits 里了，跳过；否则标记为 is_related 加入
+                    doc_id = f"graph_{rel['id']}" # 假设
+                    if doc_id not in seen_ids:
+                        expanded_hits.append(RetrievalResult(
+                            doc_id=doc_id,
+                            content=rel['content'],
+                            metadata={
+                                "law_name": rel['doc_title'],
+                                "doc_subtype": rel['doc_type'].lower(),
+                                "is_related": True,
+                                "article_num": rel['provision_no']
+                            },
+                            score=hit.score * 0.9 # 给关联结果稍低的权重，但依然保留
+                        ))
+                        seen_ids.add(doc_id)
+        
+        return expanded_hits
 
     def search_court_cases(
         self,
