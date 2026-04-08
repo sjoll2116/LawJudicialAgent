@@ -1,5 +1,6 @@
 """
-Utilities for robust structured (JSON) model outputs.
+结构化输出中间件
+确保 LLM 返回的结果能够稳定解析为 JSON 格式，并映射到 Pydantic 模型。
 """
 
 from __future__ import annotations

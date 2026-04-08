@@ -1,3 +1,7 @@
+"""
+全局日志配置中心
+提供分布式链式追踪 (Request ID) 与滚动文件存储功能。
+"""
 import logging
 import os
 import sys

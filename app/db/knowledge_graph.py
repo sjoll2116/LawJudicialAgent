@@ -1,3 +1,7 @@
+"""
+法律知识图谱管理器
+基于 SQLite 实现，负责维护法律条文、司法解释及其相互之间的关联关系。
+"""
 import sqlite3
 import json
 import os

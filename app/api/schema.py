@@ -1,3 +1,7 @@
+"""
+API 数据模型定义
+使用 Pydantic 定义请求与响应的结构化 Schema。
+"""
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 

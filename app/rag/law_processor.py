@@ -155,8 +155,40 @@ class LawDataProcessor:
 
     @staticmethod
     def _extract_article_number(article_text: str) -> str:
-        match = re.match(r"^\s*(第[一二三四五六七八九十百千零\d]+条)", article_text)
+        match = re.match(r"^\s*(第[零一二三四五六七八九十百千\d]+条)", article_text)
         return match.group(1) if match else ""
+
+    @staticmethod
+    def _trim_law_content(text: str) -> str:
+        """
+        剔除法条正文末尾误包含的“章、节、部”标题、目录信息以及空行。
+        这些信息通常出现在两个法条标识符之间，解析时会被误拉入。
+        """
+        lines = text.split('\n')
+        # 需要剔除的特征行正则表达式
+        noise_patterns = [
+            r'^\s*第[零一二三四五六七八九十\d]+[章节部]\s*.*$',
+            r'^\s*第[零一二三四五六七八九十\d]+节\s*.*$',
+            r'^\s*目录\s*$',
+            r'^\s*\d+、\s*.*$', # 可能存在的非标准标题
+        ]
+        
+        while lines:
+            last_line = lines[-1].strip()
+            # 如果是空行，继续向上查找
+            if not last_line:
+                lines.pop()
+                continue
+            
+            # 检查是否匹配噪音模式
+            is_noise = any(re.match(p, last_line) for p in noise_patterns)
+            if is_noise:
+                lines.pop()
+            else:
+                # 遇到实质性的正文行，停止剔除
+                break
+        
+        return '\n'.join(lines).strip()
 
     @staticmethod
     def _extract_references(content_text: str) -> Dict[str, List[str]]:
@@ -347,12 +379,14 @@ class LawDataProcessor:
         chunks = []
         clean_text = re.sub(r'\n{2,}', '\n', content_text.strip())
         processed_text = "\n" + clean_text
-        matches = list(re.finditer(r'^\s*(第[一二三四五六七八九十百千\d]+条)[ 　、：:]?', processed_text, re.MULTILINE))
+        matches = list(re.finditer(r'^\s*(第[零一二三四五六七八九十百千\d]+条)[ 　、：:]?', processed_text, re.MULTILINE))
         
         for i, match in enumerate(matches):
             start = match.start()
             end = matches[i+1].start() if i + 1 < len(matches) else len(processed_text)
             text = processed_text[start:end].strip()
+            # 自动剔除末尾可能夹杂的章节标题、目录等噪音
+            text = self._trim_law_content(text)
             if not text: continue
             article_num = self._extract_article_number(text)
             

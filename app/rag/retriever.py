@@ -1,3 +1,7 @@
+"""
+混合检索枢纽模块
+集成 ChromaDB 向量搜索、Whoosh 全文检索以及知识图谱关系扩展。
+"""
 from __future__ import annotations
 
 import datetime
