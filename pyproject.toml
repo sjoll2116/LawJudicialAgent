@@ -1,7 +1,7 @@
 [project]
 name = "civil-law-agent"
 version = "0.1.0"
-description = "民商事司法智能体 - 外商投资纠纷 MVP"
+description = "民商事司法智能体"
 requires-python = ">=3.10"
 dependencies = [
     "langgraph>=0.2.0",
